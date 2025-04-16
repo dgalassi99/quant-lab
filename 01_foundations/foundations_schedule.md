@@ -11,6 +11,7 @@ This section covers the basics of Python, math, and statistics for quant trading
 - [ ] read/repeat *Python for Data Analysis* - Ch 5
 - [ ] study *Options, Futures, and Other Derivatives* - Ch 1
 - [ ] What is quant trading? Why using Python? What is the workflow (retail vs institutional)?
+- [ ] quantopian lect. 1
 ### Practice
 - [ ] write a script to download and clean historical OHLCV data for AAPL, SPY, and BTC using yfinance
 - [ ] create a function that computes basic stats: return, volatility, rolling average
@@ -25,6 +26,7 @@ This section covers the basics of Python, math, and statistics for quant trading
 - [ ] read documentation about *rolling, expanding, resample, shift*
 - [ ] build moving averages (MA, EMA) and a signal generator for long/short based on MAs crossing 
 - [ ] What technical indicators are? What are pros/cons of simple rule-based strategies
+- [ ] quantopian lect. 2-3
 ### Practice
 - [ ] implement SMA/EMA with flexible window sizes
 - [ ] create a crossover strategy with signals (long = 1, short = -1)
@@ -40,6 +42,7 @@ This section covers the basics of Python, math, and statistics for quant trading
 - [ ] study *Trading and Exchanges* - Ch 1,2
 - [ ] implement a strategy logic by: (1)create position column: 1 if in trade, 0 otherwise; (2) simulate basic entry/exit logic; (3) create PnL, cumulative returns, and basic performance metrics 
 - [ ] more: Market Structure (exhanges, order books), Order types (market, limit, stop iceberg)... you can watch https://www.youtube.com/watch?v=DDtWLBAgG1s
+- [ ] quantopian lect. 4
 ### Practice
 - [ ] add a returns column and calculate strategy performance
 - [ ] plot rolling Sharpe and compare it to passive exposure

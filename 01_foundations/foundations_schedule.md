@@ -5,36 +5,57 @@ This section covers the basics of Python, math, and statistics for quant trading
 ## Week 1
 15/04/2025-22/04/2025
 
-- [ ] organize the structure of the git repository
+### Theory
+- [ ] organize the structure of the git repository for month 1-3
 - [ ] study *Quantitative Trading* - Ch 1
 - [ ] read/repeat *Python for Data Analysis* - Ch 5
-- [ ] fetch historical data from yfinance
-- [ ] more: What is quant trading? Why using Python? What is the workflow (retail vs institutional)?
+- [ ] study *Options, Futures, and Other Derivatives* - Ch 1
+- [ ] What is quant trading? Why using Python? What is the workflow (retail vs institutional)?
+### Practice
+- [ ] write a script to download and clean historical OHLCV data for AAPL, SPY, and BTC using yfinance
+- [ ] create a function that computes basic stats: return, volatility, rolling average
+- [ ] plot 30-day rolling mean & volatility — what patterns do you observe?
 
 ## Week 2
 23/04/2025-30/04/2025
- 
+
+ ### Theory
 - [ ] study *Quantitative Trading* - Ch 2
 - [ ] read/repeat *Python for Data Analysis* - Ch 6
 - [ ] read documentation about *rolling, expanding, resample, shift*
 - [ ] build moving averages (MA, EMA) and a signal generator for long/short based on MAs crossing 
-- [ ] more: What technical indicators are? What are pros/cons of simple rule-based strategies
-
+- [ ] What technical indicators are? What are pros/cons of simple rule-based strategies
+### Practice
+- [ ] implement SMA/EMA with flexible window sizes
+- [ ] create a crossover strategy with signals (long = 1, short = -1)
+- [ ] test various combinations (20/50, 50/200) and plot the signals over price
+- [ ] compare strategy returns vs. buy-and-hold — what do you notice?
+ 
 
 ## Week 3
 01/05/2025-08/05/2025 
 
+### Theory
 - [ ] study *Quantitative Trading* - Ch 3
 - [ ] study *Trading and Exchanges* - Ch 1,2
 - [ ] implement a strategy logic by: (1)create position column: 1 if in trade, 0 otherwise; (2) simulate basic entry/exit logic; (3) create PnL, cumulative returns, and basic performance metrics 
 - [ ] more: Market Structure (exhanges, order books), Order types (market, limit, stop iceberg)... you can watch https://www.youtube.com/watch?v=DDtWLBAgG1s
+### Practice
+- [ ] add a returns column and calculate strategy performance
+- [ ] plot rolling Sharpe and compare it to passive exposure
+- [ ] simulate order types with slippage – how does PnL change?
 
 ## Week 4
 09/05/2025-16/05/2025
 
+### Theory
 - [ ] read/repeat *Python for Data Analysis* - Ch 7
 - [ ] backtest the MA strategy by: (1)Track daily returns with pct_change() * position.shift(1); (2) Plot equity curve; (3) Add simple performance stats (Sharpe, win rate, max drawdown); (4) Try on more equities ;(5) Prepare a nice ipynb
 - [ ] more: What could go wrong in real execution? (slippage, latency, false signals); brainstorm ways to improve the strategy
+### Practice
+- [ ] write a helper function to compute key metrics (Sharpe, Max DD, CAGR, Win Rate)
+- [ ] try the strategy on at least 3 more tickers — do results generalize?
+- [ ] test the effect of adding volatility filters or volume conditions
 
 ## Final Deliverables
 - A notebook titled *Moving_Average_Strategy.ipynb*

@@ -19,6 +19,7 @@ Books & Chapters:
 - Quantitative Trading - E. Chan: Ch.1-3
 - Python for Data Analysis - W. McKinney: Ch.5-7
 - Trading and Exchanges - L. Harris: Ch.1-2
+- Options, Futures, and Other Derivatives - J. Hull: Ch.1
 
 Tasks:
 - Learn pandas, numpy, yfinance
@@ -31,6 +32,7 @@ Books & Chapters:
 - Quantitative Trading - E. Chan: Ch.5-6
 - Inside the Black Box - R. Narang: Ch.3-4
 - ML for Asset Managers - M. López de Prado: Ch.3
+- Options, Futures, and Other Derivatives - J. Hull: Ch.2-3
 Tasks:
 - Use bt or backtrader for backtesting
 - Walk-forward validation
@@ -53,6 +55,7 @@ Books & Chapters:
 - Intro to Time Series Forecasting - J. Brownlee (select chapters)
 - Python for Data Analysis - Ch.11
 - Quantitative Trading (review time series parts)
+- Options, Futures, and Other Derivatives - J. Hull: Ch.11-12
 Tasks:
 - Use ARIMA/GARCH models
 - Perform trend decomposition
@@ -64,6 +67,7 @@ Books & Chapters:
 - Advances in Financial ML - Ch.7, 10
 - ML for Asset Managers - Ch.5
 - The Science of Algo Trading - Ch.11
+- The Concepts and Practice of Mathematical Finance - M. Joshi: Ch.1-2
 Tasks:
 - Implement Kelly criterion, risk parity
 - Cross-validated ML pipeline
@@ -74,6 +78,8 @@ Goals: Learn core continuous-time finance and option pricing theory.
 Books & Chapters:
 - Stochastic Calculus for Finance I: The Binomial Asset Pricing Model - S. Shreve: Entire Book
 - Stochastic Calculus for Finance II: Continuous-Time Models - S. Shreve: Ch.1-4, 7-8
+- Options, Futures, and Other Derivatives - J. Hull: Ch.8-13
+- The Concepts and Practice of Mathematical Finance - M. Joshi: Ch.3-7
 Tasks:
 - Brownian motion & Itô calculus
 - Derive and implement Black-Scholes
@@ -83,6 +89,8 @@ Tasks:
 Goals: Solve pricing and optimization problems numerically.
 Books & Chapters:
 - Numerical Methods in Finance and Economics (P. Brandimarte: Ch.1-5, 9, 10)
+- Options, Futures, and Other Derivatives - J. Hull: Ch.14-17
+- The Concepts and Practice of Mathematical Finance - M. Joshi: Ch.8-9
 Tasks:
 - Implement Monte Carlo simulations for option pricing
 - Build finite difference models for PDEs (Black-Scholes)

@@ -6,8 +6,8 @@ This section covers the basics of Python, math, and statistics for quant trading
 15/04/2025-22/04/2025
 
 ### Theory
-- [ ] organize the structure of the git repository for month 1-3
-- [ ] study *Quantitative Trading* - Ch 1
+- [x] organize the structure of the git repository for month 1-3
+- [x] study *Quantitative Trading* - Ch 1
 - [ ] read/repeat *Python for Data Analysis* - Ch 5
 - [ ] study *Options, Futures, and Other Derivatives* - Ch 1
 - [ ] What is quant trading? Why using Python? What is the workflow (retail vs institutional)?

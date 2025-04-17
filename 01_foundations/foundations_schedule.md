@@ -8,14 +8,14 @@ This section covers the basics of Python, math, and statistics for quant trading
 ### Theory
 - [x] organize the structure of the git repository for month 1-3
 - [x] study *Quantitative Trading* - Ch 1
-- [ ] read/repeat *Python for Data Analysis* - Ch 5
-- [ ] study *Options, Futures, and Other Derivatives* - Ch 1
+- [x] read/repeat *Python for Data Analysis* - Ch 5
+- [x] study *Options, Futures, and Other Derivatives* - Ch 1
 - [ ] What is quant trading? Why using Python? What is the workflow (retail vs institutional)?
 - [ ] quantopian lect. 1
 ### Practice
-- [ ] write a script to download and clean historical OHLCV data for AAPL, SPY, and BTC using yfinance
-- [ ] create a function that computes basic stats: return, volatility, rolling average
-- [ ] plot 30-day rolling mean & volatility — what patterns do you observe?
+- [x] write a script to download and clean historical OHLCV data for AAPL, SPY, and BTC using yfinance
+- [x] create a function that computes basic stats: return, volatility, rolling average
+- [x] plot 30-day rolling mean & volatility — what patterns do you observe?
 
 ## Week 2
 23/04/2025-30/04/2025

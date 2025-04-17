@@ -1,5 +1,5 @@
 # Summary: Practice of Mathematical Finance by M.S. Joshi
-## Ch.1: Introduction
+## Ch.1: Risk
 
 *   **Risk is a central concept in modern finance**, and every transaction can be viewed as the buying or selling of risk. An asset is considered **riskless** if its future value is precisely determined, with a prime example being a government bond from a reliable government. However, even government bonds carry some risk related to changing interest rates.
 *   A **risky asset** is one with an uncertain future value, essentially synonymous with uncertainty. Most assets other than the safest government bonds fall into this category, including shares, foreign currency, and property. The riskiness of an asset should be judged against the return of a riskless government bond over the same period.

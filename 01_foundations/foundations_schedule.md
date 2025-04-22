@@ -21,17 +21,17 @@ This section covers the basics of Python, math, and statistics for quant trading
 23/04/2025-30/04/2025
 
  ### Theory
-- [ ] study *Quantitative Trading* - Ch 2
-- [ ] read/repeat *Python for Data Analysis* - Ch 6
+- [x] study *Quantitative Trading* - Ch 2
+- [x] read/repeat *Python for Data Analysis* - Ch 6
 - [ ] read documentation about *rolling, expanding, resample, shift*
-- [ ] build moving averages (MA, EMA) and a signal generator for long/short based on MAs crossing 
-- [ ] What technical indicators are? What are pros/cons of simple rule-based strategies
+- [x] build moving averages (MA, EMA) and a signal generator for long/short based on MAs crossing 
+- [x] What technical indicators are? What are pros/cons of simple rule-based strategies
 - [x] quantopian lect. 2-3
 ### Practice
-- [ ] implement SMA/EMA with flexible window sizes
-- [ ] create a crossover strategy with signals (long = 1, short = -1)
-- [ ] test various combinations (20/50, 50/200) and plot the signals over price
-- [ ] compare strategy returns vs. buy-and-hold — what do you notice?
+- [x] implement SMA/EMA with flexible window sizes
+- [x] create a crossover strategy with signals (long = 1, short = -1)
+- [x] test various combinations (20/50, 50/200) and plot the signals over price
+- [x] compare strategy returns vs. buy-and-hold — what do you notice?
  
 
 ## Week 3

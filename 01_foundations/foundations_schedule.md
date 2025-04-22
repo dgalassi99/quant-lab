@@ -23,7 +23,7 @@ This section covers the basics of Python, math, and statistics for quant trading
  ### Theory
 - [x] study *Quantitative Trading* - Ch 2
 - [x] read/repeat *Python for Data Analysis* - Ch 6
-- [ ] read documentation about *rolling, expanding, resample, shift*
+- [x] read documentation about *rolling, expanding, resample, shift*
 - [x] build moving averages (MA, EMA) and a signal generator for long/short based on MAs crossing 
 - [x] What technical indicators are? What are pros/cons of simple rule-based strategies
 - [x] quantopian lect. 2-3

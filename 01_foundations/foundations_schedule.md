@@ -40,13 +40,13 @@ This section covers the basics of Python, math, and statistics for quant trading
 ### Theory
 - [ ] study *Quantitative Trading* - Ch 3
 - [ ] study *Trading and Exchanges* - Ch 1,2
-- [ ] implement a strategy logic by: (1)create position column: 1 if in trade, 0 otherwise; (2) simulate basic entry/exit logic; (3) create PnL, cumulative returns, and basic performance metrics 
+- [x] implement a strategy logic by: (1)create position column: 1 if in trade, 0 otherwise; (2) simulate basic entry/exit logic; (3) create PnL, cumulative returns, and basic performance metrics 
 - [ ] more: Market Structure (exhanges, order books), Order types (market, limit, stop iceberg)... you can watch https://www.youtube.com/watch?v=DDtWLBAgG1s
 - [x] quantopian lect. 4
 ### Practice
-- [ ] add a returns column and calculate strategy performance
-- [ ] plot rolling Sharpe and compare it to passive exposure
-- [ ] simulate order types with slippage – how does PnL change?
+- [x] add a returns column and calculate strategy performance
+- [x] plot rolling Sharpe and compare it to passive exposure
+- [x] simulate order types with slippage – how does PnL change?
 
 ## Week 4
 09/05/2025-16/05/2025

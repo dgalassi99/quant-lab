@@ -37,18 +37,14 @@
 *   **This is not to say that no methods based on AI will work in prediction. The ones that work for me are usually characterized by these properties:** They are based on a sound econometric or rational basis, and not on random discovery of patterns. They have few parameters that need to be fitted to past data. They involve linear regression only, and not fitting to some esoteric non-linear functions. They are conceptually simple. All optimizations must occur in a lookback moving window, involving no future unseen data. And the effect of this optimization must be continuously demonstrated using this future, unseen data.
 *   Since this book is about starting a quantitative trading business from scratch, and not about starting a hedge fund that manages multiple millions of dollars, for example, strategies that have very low capacities because they trade too often, strategies that trade very few stocks every day, or strategies that have very infrequent positions (such as some seasonal trades in commodity futures described in Chapter 7). **Those niches are the ones that are likely still to be profitable because they have not yet been completely arbitraged away by the gigantic hedge funds.**
 # Chapter 3: Backtesting
-Finding and Using Historical Databases: Strategies require specific types of historical data. While many free or low-cost historical databases are available, data vendors often cater more to large institutions than individuals.
-•
-Data Adjustments: It is important to use historical data that has been adjusted for splits and dividends. Yahoo! Finance data, for example, is adjusted.
-•
-Survivorship Bias: A significant issue in backtesting is survivorship bias, which occurs when historical databases only include stocks that have survived, omitting those that failed. This bias can artificially inflate backtest performance. Using survivorship bias-free data is crucial but can be expensive.
-•
-High and Low Data Reliability: The high and low prices of the day are often less reliable for backtesting than open and close prices due to potential data noise or discrepancies. Backtests relying heavily on high and low data might show inflated returns.
-•
-Performance Measurement: Evaluating a strategy's performance involves checking if it outperforms a benchmark, has a high enough Sharpe ratio, and a small enough drawdown. The Sharpe ratio is a key metric for assessing risk-adjusted return.
-•
-Common Backtesting Pitfalls: Two major pitfalls to avoid are Look-Ahead Bias and Data-Snooping Bias. Data-Snooping Bias is the risk of over-optimizing a strategy on historical data such that its backtest performance is not representative of future performance. Reducing the number of parameters in a model can help mitigate this. Look-Ahead Bias involves using information in the backtest that would not have been available at the time of the trade.
-•
-Transaction Costs: Realistic backtesting must account for transaction costs, including commissions and the market impact of trades. Ignoring these costs can make an otherwise promising strategy unprofitable. The impact of transaction costs increases with trading frequency.
-•
-Strategy Refinement: After backtesting, strategies can be refined. Unsuitable strategies can be filtered out based on their backtest results, considering performance metrics and potential biases.
+
+*   **Finding and Using Historical Databases**: Strategies require specific types of historical data. While many free or low-cost historical databases are available, data vendors often cater more to large institutions than individuals.
+*   **Data Adjustments**: It is important to use historical data that has been adjusted for **splits and dividends**. Yahoo! Finance data, for example, is adjusted.
+*   **Survivorship Bias**: A significant issue in backtesting is **survivorship bias**, which occurs when historical databases only include stocks that have survived, omitting those that failed. This bias can artificially inflate backtest performance. Using survivorship bias-free data is crucial but can be expensive.
+*   **High and Low Data Reliability**: The high and low prices of the day are often less reliable for backtesting than open and close prices due to potential data noise or discrepancies. Backtests relying heavily on high and low data might show inflated returns.
+*   **Performance Measurement**: Evaluating a strategy's performance involves checking if it **outperforms a benchmark**, has a **high enough Sharpe ratio**, and a **small enough drawdown**. The Sharpe ratio is a key metric for assessing risk-adjusted return.
+*   **Common Backtesting Pitfalls**: Two major pitfalls to avoid are **Look-Ahead Bias** and **Data-Snooping Bias**. **Data-Snooping Bias** is the risk of over-optimizing a strategy on historical data such that its backtest performance is not representative of future performance. Reducing the number of parameters in a model can help mitigate this. **Look-Ahead Bias** involves using information in the backtest that would not have been available at the time of the trade.
+*   **Transaction Costs**: Realistic backtesting must account for **transaction costs**, including commissions and the market impact of trades. Ignoring these costs can make an otherwise promising strategy unprofitable. The impact of transaction costs increases with trading frequency.
+*   **Strategy Refinement**: After backtesting, strategies can be refined. Unsuitable strategies can be filtered out based on their backtest results, considering performance metrics and potential biases.
+
+In essence, Chapter 3 emphasizes the importance of rigorous backtesting with high-quality, unbiased historical data, using appropriate platforms, and being aware of common pitfalls like data-snooping and neglecting transaction costs, to ensure that the backtest results are a realistic representation of potential live trading performance.

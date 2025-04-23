@@ -38,10 +38,10 @@ This section covers the basics of Python, math, and statistics for quant trading
 01/05/2025-08/05/2025 
 
 ### Theory
-- [ ] study *Quantitative Trading* - Ch 3
-- [ ] study *Trading and Exchanges* - Ch 1,2
+- [x] study *Quantitative Trading* - Ch 3
+- [x] study *Trading and Exchanges* - Ch 1,2
 - [x] implement a strategy logic by: (1)create position column: 1 if in trade, 0 otherwise; (2) simulate basic entry/exit logic; (3) create PnL, cumulative returns, and basic performance metrics 
-- [ ] more: Market Structure (exhanges, order books), Order types (market, limit, stop iceberg)... you can watch https://www.youtube.com/watch?v=DDtWLBAgG1s
+- [x] more: Market Structure (exhanges, order books), Order types (market, limit, stop iceberg)... you can watch https://www.youtube.com/watch?v=DDtWLBAgG1s
 - [x] quantopian lect. 4
 ### Practice
 - [x] add a returns column and calculate strategy performance

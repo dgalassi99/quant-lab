@@ -8,7 +8,7 @@ My 9-month self-directed program to deep dive into financial engineering, quant 
 
 _Note: The programme could (most likely) dinamically change due to adjustments or just because it will take me more time to complete certain steps or, finally, because I will deepend some fields and be bored by others_
 
-Now, as written in the first lines I am planning to learn and improve my quantitative skills following a 9-months self study plan (10-15 hours/week). The plan will be modified as I collect more info or change ideas and is based on a MSc I would have love to follow (I could not due to work related obbligations) whihc is the MFE from EPFL (Lausanne, CH).
+Now, as written in the first lines I am planning to learn and improve my quantitative skills following a 9-months self study plan (10-15 hours/week). The plan will be modified as I collect more info or change ideas and is based on a MSc I would have love to follow (I could not due to work related obligations) which is the MFE from EPFL (Lausanne, CH).
 
 Well... let's start
 

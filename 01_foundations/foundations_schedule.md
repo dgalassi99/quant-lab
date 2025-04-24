@@ -52,13 +52,13 @@ This section covers the basics of Python, math, and statistics for quant trading
 09/05/2025-16/05/2025
 
 ### Theory
-- [ ] read/repeat *Python for Data Analysis* - Ch 7
-- [ ] backtest the MA strategy by: (1)Track daily returns with pct_change() * position.shift(1); (2) Plot equity curve; (3) Add simple performance stats (Sharpe, win rate, max drawdown); (4) Try on more equities ;(5) Prepare a nice ipynb
-- [ ] more: What could go wrong in real execution? (slippage, latency, false signals); brainstorm ways to improve the strategy
+- [x] read/repeat *Python for Data Analysis* - Ch 7
+- [x] backtest the MA strategy by: (1)Track daily returns with pct_change() * position.shift(1); (2) Plot equity curve; (3) Add simple performance stats (Sharpe, win rate, max drawdown); (4) Try on more equities ;(5) Prepare a nice ipynb
+- [x] more: What could go wrong in real execution? (slippage, latency, false signals); brainstorm ways to improve the strategy
 ### Practice
-- [ ] write a helper function to compute key metrics (Sharpe, Max DD, CAGR, Win Rate)
-- [ ] try the strategy on at least 3 more tickers — do results generalize?
-- [ ] test the effect of adding volatility filters or volume conditions
+- [x] write a helper function to compute key metrics (Sharpe, Max DD, CAGR, Win Rate)
+- [x] try the strategy on at least 3 more tickers — do results generalize?
+- [ ] test the effect of adding volatility filters or volume conditions --> when i add these filters the trading strategiees gives stranfge signals --> i have to check once again
 
 ## Final Deliverables
 - A notebook titled *Moving_Average_Strategy.ipynb*

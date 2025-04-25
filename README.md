@@ -3,6 +3,7 @@ My 9-month self-directed program to deep dive into financial engineering, quant 
 
 ## Useful Links
 - GitHub repository with 56 lectures (video+notebook): https://gist.github.com/ih2502mk/50d8f7feb614c8676383431b056f4291
+- GitHib with links to libraries, strategies and books: https://github.com/paperswithbacktest/awesome-systematic-trading
 
 ## Structure of the programme
 

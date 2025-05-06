@@ -12,11 +12,11 @@ This section introduces structured backtesting, risk management, and robust stra
 - [ ] Read *Inside the Black Box* – Ch.3  
 - [ ] Watch Quantopian Lectures 5–6  
 - [ ] What makes a good backtest? Understand lookahead bias, overfitting, and market regime change.  
-- [ ] Learn the concept of position sizing and risk-adjusted returns.
+- [x] Learn the concept of position sizing and risk-adjusted returns.
 
 ### 💻 Practice
-- [ ] Install and explore `bt` or `backtrader` — try running a basic MA strategy in either  
-- [ ] Write a modular backtesting class with: signal input, execution logic, performance stats  
+- [x] Install and explore `bt` or `backtrader` — try running a basic MA strategy in either  
+- [x] Write a modular backtesting class with: signal input, execution logic, performance stats  
 - [ ] Create position-sizing logic based on volatility or fixed allocation  
 
 ---

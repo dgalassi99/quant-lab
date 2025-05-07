@@ -8,7 +8,7 @@ This section introduces structured backtesting, risk management, and robust stra
 **17/05/2025–24/05/2025**  
 
 ### 📚 Theory
-- [ ] Study *Quantitative Trading* – Ch.4,5  
+- [x] Study *Quantitative Trading* – Ch.4,5  
 - [ ] Read *Inside the Black Box* – Ch.3  
 - [ ] Watch Quantopian Lectures 5–6  
 - [ ] What makes a good backtest? Understand lookahead bias, overfitting, and market regime change.  
@@ -17,7 +17,7 @@ This section introduces structured backtesting, risk management, and robust stra
 ### 💻 Practice
 - [x] Install and explore `bt` or `backtrader` — try running a basic MA strategy in either  
 - [x] Write a modular backtesting class with: signal input, execution logic, performance stats  
-- [ ] Create position-sizing logic based on volatility or fixed allocation  
+- [x] Create position-sizing logic based on volatility or fixed allocation  
 
 ---
 

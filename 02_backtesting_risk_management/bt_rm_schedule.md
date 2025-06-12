@@ -24,15 +24,15 @@ This section introduces structured backtesting, risk management, and robust stra
 **25/05/2025–01/06/2025**  
 
 ### 📚 Theory
-- [ ] Study *Quantitative Trading* – Ch.6    
-- [ ] Review stop-loss and drawdown management  
-- [ ] Watch Quantopian Lectures 7–8  
-- [ ] Discuss the difference between simulation and real execution (slippage, fill models, etc.)
+- [x] Study *Quantitative Trading* – Ch.6    
+- [x] Review stop-loss and drawdown management  
+- [x] Watch Quantopian Lectures 7–8  
+- [x] Discuss the difference between simulation and real execution (slippage, fill models, etc.)
 
 ### 💻 Practice
-- [ ] Implement stop-loss and take-profit logic in your backtest  
-- [ ] Add trailing stop and maximum drawdown exit conditions  
-- [ ] Simulate slippage and transaction costs, observe effect on performance  
+- [x] Implement stop-loss and take-profit logic in your backtest  
+- [x] Add trailing stop and maximum drawdown exit conditions  
+- [x] Simulate slippage and transaction costs, observe effect on performance  
 
 ---
 

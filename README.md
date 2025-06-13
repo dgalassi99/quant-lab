@@ -30,6 +30,8 @@ Tasks:
 More:
 - Lecture 1-4 quantopian link
 
+*Completed on 24/04/2025*
+
 ### 2: Backtesting and Risk Management
 Goals: Build backtests and understand execution and risk.
 Books & Chapters:

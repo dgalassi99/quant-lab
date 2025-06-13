@@ -34,6 +34,12 @@ This section introduces structured backtesting, risk management, and robust stra
 
 ---
 
+## Extra: Focus on *ML for Asset Managers*
+I find that this book could be useful for general knowledge and mostly also for the next section of the studies which is based on ML in finance.
+
+Hence, I will go through some or all the chapters of the book and create an ipynb file where I follow what is done and try to sole the exercises proposed --> Here is the link: https://github.com/dgalassi99/quant-trading-self-study/blob/main/00_books/Machine_Learning_for_Asset_Managers.ipynb
+
+---
 ## 7
 
 ### 📚 Theory

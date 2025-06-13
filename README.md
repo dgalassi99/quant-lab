@@ -13,7 +13,7 @@ Now, as written in the first lines I am planning to learn and improve my quantit
 
 Well... let's start
 
-### Month 1: Foundations of Quantitative Trading & Python
+### 1: Foundations of Quantitative Trading & Python
 Goals: Understand core principles of quant trading, basic data workflows, and Python for finance.\
 
 Books & Chapters:
@@ -30,7 +30,7 @@ Tasks:
 More:
 - Lecture 1-4 quantopian link
 
-### Month 2: Backtesting and Risk Management
+### 2: Backtesting and Risk Management
 Goals: Build backtests and understand execution and risk.
 Books & Chapters:
 - Quantitative Trading - E. Chan: Ch.5-6
@@ -47,7 +47,7 @@ Tasks:
 More:
 - Lecture 5-10 quantopian link
 
-### Month 3: Machine Learning in Finance I
+### 3: Machine Learning in Finance I
 Goals: Apply ML methods to trading signals.
 Books & Chapters:
 - Advances in Financial ML - M. López de Prado: Ch.2, 4, 5
@@ -62,7 +62,7 @@ Tasks:
 More:
 - Lecture 11-16 quantopian link
 
-### Month 4: Time Series & Financial Econometrics
+### 4: Time Series & Financial Econometrics
 Goals: Forecast returns & volatility.
 Books & Chapters:
 - Intro to Time Series Forecasting - J. Brownlee (select chapters)
@@ -78,7 +78,7 @@ Tasks:
 More:
 - Lecture 17-20 quantopian link
 
-### Month 5: Advanced ML & Portfolio Optimization
+### 5: Advanced ML & Portfolio Optimization
 Goals: Optimize portfolios and sizing models.
 Books & Chapters:
 - Advances in Financial ML - Ch.7, 10
@@ -94,7 +94,7 @@ Tasks:
 More:
 - Lecture 21-26 quantopian link
 
-### Month 6: Stochastic Calculus and Derivatives Pricing
+### 6: Stochastic Calculus and Derivatives Pricing
 Goals: Learn core continuous-time finance and option pricing theory.
 Books & Chapters:
 - Stochastic Calculus for Finance I: The Binomial Asset Pricing Model - S. Shreve: Entire Book
@@ -110,7 +110,7 @@ Tasks:
 More:
 - Lecture 27-32 quantopian link
 
-### Month 7: Numerical Methods for Finance
+### 7: Numerical Methods for Finance
 Goals: Solve pricing and optimization problems numerically.
 Books & Chapters:
 - Numerical Methods in Finance and Economics (P. Brandimarte: Ch.1-5, 9, 10)
@@ -125,7 +125,7 @@ Tasks:
 More:
 - Lecture 33-38 quantopian link
 
-### Month 8: Strategy Integration & Project Design
+### 8: Strategy Integration & Project Design
 Goals: Develop and evaluate a complete trading strategy.
 
 Tasks:
@@ -137,7 +137,7 @@ Tasks:
 More:
 - Lecture 39-44 quantopian link
 
-### Month 9: Capstone Project & Interview Prep
+### 9: Capstone Project & Interview Prep
 Goals: Finalize your project and prepare for quant interviews.
 Tasks:
 - Complete a polished capstone with Jupyter + PDF write-up

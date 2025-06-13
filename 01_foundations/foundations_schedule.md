@@ -2,8 +2,7 @@
 
 This section covers the basics of Python, math, and statistics for quant trading.
 
-## Week 1
-15/04/2025-22/04/2025
+## 1
 
 ### Theory
 - [x] organize the structure of the git repository for month 1-3
@@ -17,8 +16,7 @@ This section covers the basics of Python, math, and statistics for quant trading
 - [x] create a function that computes basic stats: return, volatility, rolling average
 - [x] plot 30-day rolling mean & volatility — what patterns do you observe?
 
-## Week 2
-23/04/2025-30/04/2025
+## 2
 
  ### Theory
 - [x] study *Quantitative Trading* - Ch 2
@@ -34,8 +32,7 @@ This section covers the basics of Python, math, and statistics for quant trading
 - [x] compare strategy returns vs. buy-and-hold — what do you notice?
  
 
-## Week 3
-01/05/2025-08/05/2025 
+## 3
 
 ### Theory
 - [x] study *Quantitative Trading* - Ch 3
@@ -48,8 +45,7 @@ This section covers the basics of Python, math, and statistics for quant trading
 - [x] plot rolling Sharpe and compare it to passive exposure
 - [x] simulate order types with slippage – how does PnL change?
 
-## Week 4
-09/05/2025-16/05/2025
+## 4
 
 ### Theory
 - [x] read/repeat *Python for Data Analysis* - Ch 7

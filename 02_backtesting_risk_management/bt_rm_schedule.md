@@ -4,8 +4,7 @@ This section introduces structured backtesting, risk management, and robust stra
 
 ---
 
-## Week 5  
-**17/05/2025–24/05/2025**  
+## 5
 
 ### 📚 Theory
 - [x] Study *Quantitative Trading* – Ch.4,5   
@@ -20,8 +19,7 @@ This section introduces structured backtesting, risk management, and robust stra
 
 ---
 
-## Week 6  
-**25/05/2025–01/06/2025**  
+## 6 
 
 ### 📚 Theory
 - [x] Study *Quantitative Trading* – Ch.6    
@@ -36,8 +34,7 @@ This section introduces structured backtesting, risk management, and robust stra
 
 ---
 
-## Week 7  
-**02/06/2025–09/06/2025**
+## 7
 
 ### 📚 Theory
 - [ ] Study *ML for Asset Managers* – Ch.3 (focus: evaluation and validation)  
@@ -53,8 +50,7 @@ This section introduces structured backtesting, risk management, and robust stra
 
 ---
 
-## Week 8  
-**10/06/2025–17/06/2025**
+## 8
 
 ### 📚 Theory  
 - [ ] Study *Options, Futures, and Other Derivatives* – Ch.3  

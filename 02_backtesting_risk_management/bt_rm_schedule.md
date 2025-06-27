@@ -43,16 +43,16 @@ Hence, I will go through some or all the chapters of the book and create an ipyn
 ## 7
 
 ### 📚 Theory
-- [ ] Study *ML for Asset Managers* – Ch.3 (focus: evaluation and validation)  
+- [x] Study *ML for Asset Managers* – Ch.3 (focus: evaluation and validation)  
 - [ ] Read *Options, Futures, and Other Derivatives* – Ch.2  
-- [ ] Watch Quantopian Lecture 9  
-- [ ] What is walk-forward validation? Why is it crucial in live trading?  
-- [ ] How to split datasets in-sample, out-of-sample, and test
+- [x] Watch Quantopian Lecture 9  
+- [x] What is walk-forward validation? Why is it crucial in live trading?  
+- [x] How to split datasets in-sample, out-of-sample, and test
 
 ### 💻 Practice
-- [ ] Apply walk-forward validation to your MA strategy  
-- [ ] Write a function that iterates through rolling windows and records performance  
-- [ ] Visualize out-of-sample performance stability  
+- [x] Apply walk-forward validation to your MA strategy  
+- [x] Write a function that iterates through rolling windows and records performance  
+- [x] Visualize out-of-sample performance stability  
 
 ---
 

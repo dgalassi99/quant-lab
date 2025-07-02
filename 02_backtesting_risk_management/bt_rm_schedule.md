@@ -59,15 +59,15 @@ Hence, I will go through some or all the chapters of the book and create an ipyn
 ## 8
 
 ### 📚 Theory  
-- [ ] Study *Options, Futures, and Other Derivatives* – Ch.3  
-- [ ] Watch Quantopian Lecture 10  
-- [ ] Explore how futures/options contracts can be used in strategy hedging  
-- [ ] What are leverage, margin, and risk exposure?
+- [x] Study *Options, Futures, and Other Derivatives* – Ch.3  
+- [x] Watch Quantopian Lecture 10  
+- [x] Explore how futures/options contracts can be used in strategy hedging  
+- [x] What are leverage, margin, and risk exposure?
 
 ### 💻 Practice
-- [ ] Incorporate leverage in your strategy simulation  
-- [ ] Build a dashboard that shows: cumulative returns, drawdown, volatility, Sharpe, exposure  
-- [ ] Compare strategies with and without drawdown protection  
+- [x] Incorporate leverage in your strategy simulation  
+- [x] Build a dashboard that shows: cumulative returns, drawdown, volatility, Sharpe, exposure  
+- [x] Compare strategies with and without drawdown protection  
 
 ---
 

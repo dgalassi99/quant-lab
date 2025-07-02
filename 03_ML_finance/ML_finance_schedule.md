@@ -8,7 +8,7 @@ This section introduces supervised ML techniques applied to financial time serie
 **18/06/2025–25/06/2025**
 
 ### 📚 Theory
-- [ ] Study *Advances in Financial ML* – Ch.2  
+- [ ] Study *Advances in Financial ML* – Ch.2,3
 - [ ] Study *The Science of Algorithmic Trading* – Ch.2  
 - [ ] Review Quantopian Lectures 11–12  
 - [ ] Understand why traditional ML struggles in finance  

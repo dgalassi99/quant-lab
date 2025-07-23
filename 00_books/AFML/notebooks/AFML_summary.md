@@ -63,11 +63,11 @@ If we need to model more instruments with dynamically adjustable weights or deal
 
 Suppose we have a series of bars with the following columns:
 
-- $o_i_t$ is the open price
-- $p_i_t$ is the close price
-- $f_i_t$ is the USD value of one point of instrument (including foreign excahnge rate) 
-- $v_i_t$ is the volume
-- $d_i_t$ is the carry, dividend, coupon paid, ...
+- $o_{i t}$ is the open price
+- $p_{i t}$ is the close price
+- $f_{i t}$ is the USD value of one point of instrument (including foreign excahnge rate) 
+- $v_{i t}$ is the volume
+- $d_{i t}$ is the carry, dividend, coupon paid, ...
 
 where i = 1, ...,I is the instrument index and t = 1, ...,T is the bar index
 

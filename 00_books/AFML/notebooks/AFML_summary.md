@@ -82,34 +82,76 @@ How do we solve it?
 Produce a time series that reflects the value of 1 USD invested in a spread. Changes in teh sereis are reflected in the PnL, the series is always postive and the other shortfall are solved. This TS is used to model, generate signal and  trade as if it was an ETF
 
 
-Suppose we have a series of bars with the following columns:
+Here is the notation:
 
-- $o_{i t}$ is the open price
-- $p_{i t}$ is the close price
-- $f_{i t}$ is the USD value of one point of instrument (including foreign excahnge rate) 
-- $v_{i t}$ is the volume
-- $d_{i t}$ is the carry, dividend, coupon paid, ... or other costs.
+| Symbol                    | Meaning                                         |
+| ------------------------- | ----------------------------------------------- |
+| $i = 1, ..., I$           | Instrument index (each contract)                |
+| $t = 1, ..., T$           | Time index (bar index)                          |
+| $B \subseteq \{1,...,T\}$ | Times where rebalancing happens                 |
+| $\omega_{i,t}$            | Allocation weight of instrument $i$ at time $t$ |
+| $o_{i,t}$, $p_{i,t}$      | Open and close prices                           |
+| $\phi_{i,t}$              | USD value of one point (incl. FX)               |
+| $d_{i,t}$                 | Carry, dividend, coupon, or cost                |
+| $h_{i,t}$                 | Holdings of instrument $i$ at time $t$          |
+| $K_t$                     | Total value of portfolio                        |
+| $\delta_{i,t}$            | Price change used for PnL                       |
+.
 
 where $i = 1, ...,I$ is the instrument index and $t = 1, ...,T$ is the bar index. 
 
-Even if some instruments are not tradable in $[t-1,t]$ they are at least tradable at $t-1$ and $t$. Take a bastek of futures with allocation vector $\omega_t$ rebalanced (or rolled) on bars B in {1,..., T}, the 1 USD investment value ${K_t}$ is: 
+Even if some instruments are not tradable in $[t-1,t]$ they are at least tradable at $t-1$ and $t$. Take a basket of futures with allocation vector $\omega_t$ rebalanced (or rolled) on bars B in {1,..., T}.
+
+We want to simulate how the value of $1 invested in the basket evolves over time:
+
+
+1. **Holdings** $h_{i t}: how many of each instrument we hold
 
 $$
-h_{i,t} = 
+h_{i t} = 
 \begin{cases}
-\frac{\omega_{i,t} K_t}{o_{i,t+1} \phi_{i,t}} \Bigg/ \sum_{i=1}^I \left| \omega_{i,t} \right| & \text{if } t \in B \\
+\frac{\omega_{i t} K_t}{o_{i,t+1} \phi_{i t}} \Bigg/ \sum_{i=1}^I \left| \omega_{i t} \right| & \text{if } t \in B (rebalance) \\
 h_{i,t-1} & \text{otherwise}
 \end{cases}
 $$
 
+- when we rebalnce we recalcualte our holdings
+- otherwise we keep the same holdings
+
+2. **Price Change** $\delta_{i t}: the price movement for each instrument 
 $$
 \delta_{i,t} = 
 \begin{cases}
-p_{i,t} - o_{i,t} & \text{if } (t-1) \in B \\
+p_{i t} - o_{i t} & \text{if } (t-1) \in B \\
 \Delta p_{i,t} & \text{otherwise}
 \end{cases}
 $$
 
+3. **Portofolio Update** $K_{i t}: the PnL is calculated as
 $$
-K_t = K_{t-1} + \sum_{i=1}^I h_{i,t-1} \phi_{i,t} \left( \delta_{i,t} + d_{i,t} \right)
+K_t = K_{t-1} + \sum_{i=1}^I h_{i t-1} \phi_{i t} \left( \delta_{i t} + d_{i t} \right)
 $$
+
+With $K_0 = 1$ the initial AUM. Note that dividends $d_{i t}$ are already embedded in $K_t$. 
+
+**Trading Costs and Execution** ....
+
+1. **Rebalancing cost** \( c_t \):  
+   \[
+   c_t = \sum_{i=1}^{I} \left( |h_{i,t-1}| p_{i,t} + |h_{i,t}| o_{i,t+1} \right) \phi_{i,t} \tau_i
+   \]
+   (Track separately, not embedded in \( K_t \). Use as a negative dividend.)
+
+2. **Bid-ask cost** \( \tilde{c}_t \):  
+   \[
+   \tilde{c}_t = \sum_{i=1}^{I} |h_{i,t-1}| p_{i,t} \phi_{i,t} \tau_i
+   \]
+   (Charged when buying/selling the ETF-like unit.)
+
+3. **Volume constraint** \( v_t \):  
+   \[
+   v_t = \min_i \left\{ \frac{v_{i,t}}{|h_{i,t-1}|} \right\}
+   \]
+   (The least liquid instrument limits how many spread units you can trade.)
+
+---

@@ -61,14 +61,55 @@ For info on *information-driven bars* see pages 29-32
 
 If we need to model more instruments with dynamically adjustable weights or deal with products paying irregular coupons/dividends we may have issues. How can we solve it? ... the ETF trick.
 
+##### ETF Trick
+
+The goal is to transform any complex multi-product dataset into a single dataset that resembles a total-return ETF. 
+
+Why is this useful? 
+
+Because the code e can always assume that you trade
+cashlike products (non-expiring cash instruments), regardless of the complexity and composition of the underlying series.
+
+Suppose we want to develop a strategy to trade futures spread. Some issues arise.
+
+1. Spreads have a vector of weights that changes overtime. Hence, the value of the spread might change even if prices are constant, so you can see you PnL changing because of changing weights (not prices!). You can be mislead that the stragegy is profitable when indeed only weights changed.
+2. Spreads are differences or weighted combinations of prices, thus, they can assume negative values. Sometimes handling negative values can be tricky.
+3. Different futures contract may have different trading hours. Thus, the spread might not be exactly tradable and you can face latency risk or slippage cause you can't trade all the legs simultaneously.
+4. You need to take into account the cost of entering exiting multiple contracts along the duration of the strategy.
+
+How do we solve it? 
+
+Produce a time series that reflects the value of 1 USD invested in a spread. Changes in teh sereis are reflected in the PnL, the series is always postive and the other shortfall are solved. This TS is used to model, generate signal and  trade as if it was an ETF
+
+
 Suppose we have a series of bars with the following columns:
 
 - $o_{i t}$ is the open price
 - $p_{i t}$ is the close price
 - $f_{i t}$ is the USD value of one point of instrument (including foreign excahnge rate) 
 - $v_{i t}$ is the volume
-- $d_{i t}$ is the carry, dividend, coupon paid, ...
+- $d_{i t}$ is the carry, dividend, coupon paid, ... or other costs.
 
-where i = 1, ...,I is the instrument index and t = 1, ...,T is the bar index
+where $i = 1, ...,I$ is the instrument index and $t = 1, ...,T$ is the bar index. 
 
-##### ETF Trick
+Even if some instruments are not tradable in $[t-1,t]$ they are at least tradable at $t-1$ and $t$. Take a bastek of futures with allocation vector $\omega_t$ rebalanced (or rolled) on bars B in {1,..., T}, the 1 USD investment value ${K_t}$ is: 
+
+$$
+h_{i,t} = 
+\begin{cases}
+\frac{\omega_{i,t} K_t}{o_{i,t+1} \phi_{i,t}} \Bigg/ \sum_{i=1}^I \left| \omega_{i,t} \right| & \text{if } t \in B \\
+h_{i,t-1} & \text{otherwise}
+\end{cases}
+$$
+
+$$
+\delta_{i,t} = 
+\begin{cases}
+p_{i,t} - o_{i,t} & \text{if } (t-1) \in B \\
+\Delta p_{i,t} & \text{otherwise}
+\end{cases}
+$$
+
+$$
+K_t = K_{t-1} + \sum_{i=1}^I h_{i,t-1} \phi_{i,t} \left( \delta_{i,t} + d_{i,t} \right)
+$$

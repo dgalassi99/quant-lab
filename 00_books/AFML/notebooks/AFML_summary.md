@@ -1,0 +1,74 @@
+# ADVANCES IN FINANCIAL MACHINE LEARNING: RESUME
+
+## SECTION 1 - DATA ANALYSIS
+
+### Financial Data Structures
+
+#### Types of Financial Data
+
+**Fundamental Data**
+
+Mostly accounting data reported quarterly. Those have low frequency and can be used in coupling with higher frequency data.
+
+ Typical issues?
+
+1. Data are reported with a lapse. For example Bloomberg data are indexed by the last date included into the report, which preceeds the releasing date. Make sure to be aligned!
+2. Backfilling occurs. That is filling missing data a posteriori.
+3. Reinstating values. That is changing a value that wa originally mistaken. For example we have 3 valaues for GDP, the original release and two following corrections. Using the correection in an analysis were these corrections were not yet made creates errors!
+
+**Market Data**
+
+Trading activities taking place in an exchange. It is high frequency, not trivial to process and abundant (over 10 TB daily)
+
+**Analytics**
+
+Derivative data from fundamental, market or primary analytic data. So the main thing to take in consideration is that these data are pre-processed by somebody. Hence, these might be expensive and also biased!
+
+**Alternative Data**
+
+Data produced by individuals (social media, web searches...) or by businesses (transactions,...) or sensors (CCTV, satellites,...)
+
+#### Bars
+
+To apply ML we need to parse data in a regular format. We need to create tables with rows or bars. 
+
+The goal is to transform a series of observetions at an irregular frequency into an homogeneous sample
+
+**Time Bars**
+
+Obtained by sampling information at fixed time intervals (timestamp, open, close, volume, ...). Even if the most popular they should be avoided.
+1. Markets do not process information at a constant time interval. For example open and close hours are more active. Hnece we risk oversampling infomration when the markets are more active.
+2. Exhibit poor statistical properties (heteroscedasticity, non-normality,...)
+
+**Tick Bars**
+
+Tick bars aggregate data after a fixed number of transactions (like 1,000 trades). This ties the analysis directly to market activity instead of time, making it a proxy for the arrival of new information in the market. Tick bars are more likely to be gaussian distributed, which is a common assumption in many ML methods.
+
+**Volume Bars**
+
+Tick bars can have a problem, an order of 10 shares is one tick, while 10 orders of 1 share are 10 transactions. Volume bars solve this issue by sampling every time a pre-defined number of shares. Example, sample prices everytime a contract exchanges 100 units, regardless the number of ticks involved.
+
+**Dollar Bars**
+
+Sampling an obs everytime a pre-defined market value is exchanged. Why?
+1. If a stock appreciates 100% in X years, it will take half of stockts traded to get the same volume. Hnece, with significant price fluctuations dollar bars appear to be the best choice.
+2. The number of outstanding shares changes due to corporate decisions. Dollar bars are robust agains security issues, splits and buybacks
+
+
+For info on *information-driven bars* see pages 29-32
+
+#### Multi-Product Series
+
+If we need to model more instruments with dynamically adjustable weights or deal with products paying irregular coupons/dividends we may have issues. How can we solve it? ... the ETF trick.
+
+Suppose we have a series of bars with the following columns:
+
+- $o_i_t$ is the open price
+- $p_i_t$ is the close price
+- $f_i_t$ is the USD value of one point of instrument (including foreign excahnge rate) 
+- $v_i_t$ is the volume
+- $d_i_t$ is the carry, dividend, coupon paid, ...
+
+where i = 1, ...,I is the instrument index and t = 1, ...,T is the bar index
+
+##### ETF Trick

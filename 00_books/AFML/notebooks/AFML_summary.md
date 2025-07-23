@@ -136,24 +136,23 @@ $$
 
 With $K_0 = 1$ the initial AUM. Note that dividends $d_{i t}$ are already embedded in $K_t$. 
 
-**Trading Costs and Execution** ....
+4. **Trading Costs and Execution** ....
 
-1. **Rebalancing cost** \( c_t \):  
-   \[
-   c_t = \sum_{i=1}^{I} \left( |h_{i,t-1}| p_{i,t} + |h_{i,t}| o_{i,t+1} \right) \phi_{i,t} \tau_i
-   \]
-   (Track separately, not embedded in \( K_t \). Use as a negative dividend.)
+- **Rebalancing cost**:  
 
-2. **Bid-ask cost** \( \tilde{c}_t \):  
-   \[
-   \tilde{c}_t = \sum_{i=1}^{I} |h_{i,t-1}| p_{i,t} \phi_{i,t} \tau_i
-   \]
-   (Charged when buying/selling the ETF-like unit.)
+$$c_t = \sum_{i=1}^{I} \left( |h_{i,t-1}| \cdot p_{i,t} + |h_{i,t}| \cdot o_{i,t+1} \right) \cdot \phi_{i,t} \cdot \tau_i$$  
 
-3. **Volume constraint** \( v_t \):  
-   \[
-   v_t = \min_i \left\{ \frac{v_{i,t}}{|h_{i,t-1}|} \right\}
-   \]
-   (The least liquid instrument limits how many spread units you can trade.)
+Track this cost separately. It is not embedded in $K_t$, since embedding would cause false PnL (e.g., from shorting). You can treat $c_T$ as a negative dividend** in your code.
 
----
+- **Bid-ask cost**:  
+
+$$\tilde{c}_t = \sum_{i=1}^{I} |h_{i,t-1}| \cdot p_{i,t} \cdot \phi_{i,t} \cdot \tau_i$$  
+
+This represents the cost of crossing the spread when buying or selling one unit of the synthetic ETF.
+
+- **Volume constraint**:  
+
+$$v_t = \min_i \left\{ \frac{v_{i,t}}{|h_{i,t-1}|} \right\}$$  
+
+The least liquid instrument limits how many synthetic spread units can be traded.
+

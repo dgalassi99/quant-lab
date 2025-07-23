@@ -152,7 +152,7 @@ This represents the cost of crossing the spread when buying or selling one unit 
 
 - **Volume constraint**:  
 
-$$v_t = \min_i \left\{ \frac{v_{i,t}}{|h_{i,t-1}|} \right\}$$  
+$$v_t = \min_i \left\lbrace \frac{v_{i,t}}{|h_{i,t-1}|} \right\rbrace$$  
 
 The least liquid instrument limits how many synthetic spread units can be traded.
 

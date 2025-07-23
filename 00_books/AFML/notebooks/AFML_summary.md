@@ -119,6 +119,7 @@ $$
 - otherwise we keep the same holdings
 
 2. **Price Change** $\delta_{i t}: the price movement for each instrument 
+
 $$
 \delta_{i,t} = 
 \begin{cases}
@@ -128,6 +129,7 @@ p_{i t} - o_{i t} & \text{if } (t-1) \in B \\
 $$
 
 3. **Portofolio Update** $K_{i t}: the PnL is calculated as
+
 $$
 K_t = K_{t-1} + \sum_{i=1}^I h_{i t-1} \phi_{i t} \left( \delta_{i t} + d_{i t} \right)
 $$

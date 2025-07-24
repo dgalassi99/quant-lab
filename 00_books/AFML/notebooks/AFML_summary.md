@@ -253,3 +253,58 @@ To summarize, PCA-based portfolio weights are exposures to assets designed to ac
 
 - The key goal is to control how risk is distributed across independent sources of variation, rather than how capital is simply split.
 
+
+##### Single Future Roll
+
+When trading futures, rolling from one contract to the next introduces price discontinuities called roll gaps. These gaps can distort the price series if not handled properly. 
+
+**ETF Trick for Spreads**
+
+- The ETF trick treats a spread of futures contracts as a synthetic asset. 
+- This works well for multi-legged spreads and can also be applied to a single futures contract (as a 1-legged spread).
+- The trick creates a continuous price series by reinvesting PnL and adjusting for roll costs, keeping the series strictly positive.
+
+Alternatively, for one futures only...
+
+**Roll Gaps for Single Futures Contracts**
+
+- Compute the cumulative roll gaps.
+- Subtract these cumulative gaps from the raw price series to create a continuous price series without jumps.
+- Simpler and more direct for single futures.
+
+Rolled prices are used for simulating PnL. However, raw prices should still be used to size positions and determine capital consumption. Keep in mind, rolled prices can indeed become negative, particularly in futures contracts that sold off while in contango.
+
+In general, we wish to work with non-negative rolled series, in which case we can derive the price series of a $1 investment as follows: (1) Compute a time series of rolled futures prices, (2) compute the return (r) as rolled price change divided by the previous raw price, and (3) form a price series using those returns (i.e.,(1+r).cumprod()).
+
+#### Sampling Features
+
+Once a structured dataset is made how can we apply ML?
+
+Well, we need to sample bars to produce features with relevant training examples.
+
+##### Sampling for Reduction
+
+Sometime downsampling the features space is useful to fit a ML algo.
+Usually we do it by random sampling, tho we could miss out the most important infomration relevant to maximize the predictive power.
+
+##### Event-Based Sampling - CUSUM Filter
+
+Sometimes we want to spot how events affect the development of an instrument. One of the most used methods is teh CUSUM filter.
+
+Consider IID observations {$y_t with t = 1,..., T$} we define the cumulative sum as:
+
+$$
+S_t = \max \left\{ 0,\ S_{t-1} + y_t - \mathbb{E}_{t-1}[y_t] \right\}
+$$
+
+With $S_0 = =$. A signal is generated when $S_t > h$, for some threshold value $h$. The filter is used to identify a sequence of positive divergences from any reset level zero. 
+
+Cleary the concept can be extended in a symmetric case:
+
+$$
+S_{t+} = \max \left\{ 0,\ S_{t-1 +} + y_t - \mathbb{E}_{t-1}[y_t] \right\}
+
+S_{t-} = \max \left\{ 0,\ S_{t-1 -} + y_t - \mathbb{E}_{t-1}[y_t] \right\}
+
+S_{t} = \max \left\{S_{t+},\ S_{t-} \right\}
+$$

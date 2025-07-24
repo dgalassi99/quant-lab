@@ -1,8 +1,10 @@
 ### COLLECTION OF BOOK SCRIPTS 
 
+import numpy as np
+import pandas as pd
+
 # SNIPPET 2.1 -----------------------------------------------------------------------#
 
-import numpy as np
 
 def pca_weights(cov_matrix, risk_distribution = None, risk_target = 1.0):
     """ 
@@ -114,3 +116,43 @@ def generate_synthetic_futures_data():
     })
     df = df.set_index('date')
     return df
+
+# SNIPPET 2.3 - COMPUTE NON-NEGATIVE PRICE INDEX SERIES -----------------------------------------------------------------------#
+
+def compute_non_negative_rolled_price_index(df, 
+                                dictio={'Instrument': 'contract_id', 'Open': 'open', 'Close': 'close'}, 
+                                matchEnd=True):
+    """
+    Compute a non-negative rolled price series (simulated $1 investment)
+    from a raw futures price DataFrame.
+
+    Parameters:
+    - df: DataFrame containing futures price data.
+    - dictio: Dictionary mapping logical names to column names.
+    - matchEnd: If True, align rolled series to end of raw series (backward roll).
+
+    Returns:
+    - rolled_df: DataFrame with adjusted close prices, returns, and rolled investment price.
+    """
+
+    df = df.copy()
+    
+    # Step 1: Compute cumulative roll gaps
+    gaps = roll_gaps(df, dictio=dictio, matchEnd=matchEnd)
+
+    # Step 2: Adjust the prices by subtracting cumulative roll gaps
+    for fld in [dictio['Open'], dictio['Close']]:
+        df[f'{fld}_adj'] = df[fld] - gaps
+
+    # Step 3: Compute returns using adjusted close but dividing by raw close
+    df['Returns'] = df[f"{dictio['Close']}_adj"].diff() / df[dictio['Close']].shift(1)
+
+    # Step 4: Compute non-negative price index from returns
+    df['Price_Index'] = (1 + df['Returns']).cumprod()
+
+    return df
+
+
+synthetic_df = generate_synthetic_futures_data()
+rolled_df = compute_non_negative_rolled_price_index(synthetic_df)
+rolled_df[['close', 'close_adj', 'Returns', 'Price_Index']].head()

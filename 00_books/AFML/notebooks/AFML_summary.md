@@ -105,7 +105,7 @@ Even if some instruments are not tradable in $[t-1,t]$ they are at least tradabl
 We want to simulate how the value of $1 invested in the basket evolves over time:
 
 
-1. **Holdings** $h_{i t}: how many of each instrument we hold
+1. **Holdings** $h_{i t}$: how many of each instrument we hold
 
 $$
 h_{i t} = 
@@ -118,7 +118,7 @@ $$
 - when we rebalnce we recalcualte our holdings
 - otherwise we keep the same holdings
 
-2. **Price Change** $\delta_{i t}: the price movement for each instrument 
+2. **Price Change** $\delta_{i t}$: the price movement for each instrument 
 
 $$
 \delta_{i,t} = 
@@ -128,7 +128,7 @@ p_{i t} - o_{i t} & \text{if } (t-1) \in B \\
 \end{cases}
 $$
 
-3. **Portofolio Update** $K_{i t}: the PnL is calculated as
+3. **Portofolio Update** $K_{i t}$: the PnL is calculated as
 
 $$
 K_t = K_{t-1} + \sum_{i=1}^I h_{i t-1} \phi_{i t} \left( \delta_{i t} + d_{i t} \right)
@@ -155,4 +155,101 @@ This represents the cost of crossing the spread when buying or selling one unit 
 $$v_t = \min_i \left\lbrace \frac{v_{i,t}}{|h_{i,t-1}|} \right\rbrace$$  
 
 The least liquid instrument limits how many synthetic spread units can be traded.
+
+##### PCA Weights
+
+Another interesting question is: how do we calculate the vector of weights $\omega_t$?
+
+The following method is useful to compute the portfolio allocation vector $\omega_t$ that delivers a user-defined risk distribution across the principal components of the covariance matrix $V$ (covaraince matrix of returns containing volatility and correlation)
+
+
+Consider an IID Multivariate Gaussian process (like stock returns, changes in bond yields or in options volatilities) for a portfolio of N instruments) having a vector of means $\mu (Nx1)$ and a covariance matrix $V (NxN)$.
+
+How do we proceed?
+
+1. **Spectral decomposition**  
+
+Decompose the covariance matrix $V$:
+
+$$VW = W\Lambda$$
+
+- $W$ contains eigenvectors (principal components giving us the directions of independent risk) 
+- $\Lambda$ is a diagonal matrix of eigenvalues (magnitude of risk in a given direction), ordered in descending size
+
+This operation allows us to re-express the portfolio as a combination of orthogonal (uncorrelated) risk sources.
+
+2. **Risk of portfolio allocation $\omega$**  
+   
+The portfolio (total) risk is:
+
+$$
+\sigma^2 = \omega^\top V \omega = \omega^\top W \Lambda W^\top \omega = \beta^\top \Lambda \beta
+$$
+
+where:
+
+$$
+\beta = W^\top \omega
+$$
+
+represents the projection of $\omega$ in the orthogonal (principal component) basis. In other words, the vector of exposure to each component. 
+
+3. **Risk contribution by component**  
+
+Because $\Lambda$ is diagonal:
+
+$$
+\sigma^2 = \sum_{n=1}^N \beta_n^2 \Lambda_{n,n}
+$$
+
+Define the **risk contribution** of component $n$ as:
+
+$$
+R_n = \frac{\beta_n^2 \Lambda_{n,n}}{\sigma^2}
+$$
+
+- $\beta_n$ = exposure to component $n$
+
+- $\Lambda_{n,n}$ = variance (risk size) of that component
+
+- $ \beta_n^2 \Lambda_{n,n} $ = how much raw risk from component $n$
+
+$$
+\sum_{n=1}^N R_n = 1
+$$
+
+So $\{R_n\}_{n=1}^N$ is a **risk distribution** over the principal components. It tells me what % of my total portfolio risk comes from compenent $n$!
+
+4. **Construct $\beta$ from a desired risk distribution $R$**  
+
+Now if it is desired to allocate risk evenly or in a different wa, such as:
+
+- Equal risk: $R_1 = R_2 = ... = R_N = \frac{1}{N}$
+- Or maybe: 80% to PC1, 20% to PC2, and 0% to the rest
+
+For this desired target risk distribution $R$, the required projection is:
+
+$$
+\beta_n = \sigma \sqrt{ \frac{R_n}{\Lambda_{n,n}} }
+$$
+
+5. **Convert $\beta$ back to allocation vector $\omega$**  
+
+$$
+\omega = W \beta
+$$
+
+Any rescaling of $\omega$ rescales $\sigma$ proportionally, but the **risk distribution $R$ remains unchanged**.
+
+This technique is powerful because it lets you directly design how your portfolio's risk is distributed across statistically independent components (principal components) of market movement.
+
+To summarize, PCA-based portfolio weights are exposures to assets designed to achieve a specific risk distribution across the principal components (uncorrelated risk factors) of the asset returns.
+
+- Weights represent not simple capital allocations but the amount of exposure needed to target risk in each principal component.
+
+- They do not sum to 1 because they are focused on risk allocation, not budget allocation.
+
+- These weights can be positive or negative and may require normalization or scaling before being used in a real portfolio.
+
+- The key goal is to control how risk is distributed across independent sources of variation, rather than how capital is simply split.
 

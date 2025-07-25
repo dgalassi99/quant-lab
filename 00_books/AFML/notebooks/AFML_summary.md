@@ -291,20 +291,25 @@ Usually we do it by random sampling, tho we could miss out the most important in
 
 Sometimes we want to spot how events affect the development of an instrument. One of the most used methods is teh CUSUM filter.
 
-Consider IID observations {$y_t with t = 1,..., T$} we define the cumulative sum as:
+Consider IID observations $y_t$ with $t = 1,..., T$ we define the cumulative sum as:
 
 $$
-S_t = \max \left\{ 0,\ S_{t-1} + y_t - \mathbb{E}_{t-1}[y_t] \right\}
+S_t = \max\left( 0,\ S_{t-1} + y_t - \mathbb{E}_{t-1}[y_t] \right)
 $$
 
-With $S_0 = =$. A signal is generated when $S_t > h$, for some threshold value $h$. The filter is used to identify a sequence of positive divergences from any reset level zero. 
+With $S_0 = 0$. A signal is generated when $S_t > h$, for some threshold value $h$.  
+The filter is used to identify a sequence of positive divergences from any reset level zero.
 
-Cleary the concept can be extended in a symmetric case:
+Clearly, the concept can be extended in a symmetric case:
 
 $$
-S_{t+} = \max \left\{ 0,\ S_{t-1 +} + y_t - \mathbb{E}_{t-1}[y_t] \right\}
+S_{t+} = \max\left( 0,\ S_{t-1+} + y_t - \mathbb{E}_{t-1}[y_t] \right)
+$$
 
-S_{t-} = \max \left\{ 0,\ S_{t-1 -} + y_t - \mathbb{E}_{t-1}[y_t] \right\}
+$$
+S_{t-} = \max\left( 0,\ S_{t-1-} - y_t + \mathbb{E}_{t-1}[y_t] \right)
+$$
 
-S_{t} = \max \left\{S_{t+},\ S_{t-} \right\}
+$$
+S_t = \max\left( S_{t+},\ S_{t-} \right)
 $$

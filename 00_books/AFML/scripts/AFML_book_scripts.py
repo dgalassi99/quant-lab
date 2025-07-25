@@ -152,7 +152,33 @@ def compute_non_negative_rolled_price_index(df,
 
     return df
 
+# SNIPPET 2.4 - THE SYMMETRIC CUSUM FILTER -----------------------------------------------------------------------#
 
-synthetic_df = generate_synthetic_futures_data()
-rolled_df = compute_non_negative_rolled_price_index(synthetic_df)
-rolled_df[['close', 'close_adj', 'Returns', 'Price_Index']].head()
+def get_CUSUM_events(gRaw, h):
+    """
+    Symmetric CUSUM filter to detect events in a time series.
+
+    Parameters:
+    - gRaw: pd.Series, the raw time series (e.g. price)
+    - h: float, threshold to signal a new event
+
+    Returns:
+    - pd.DatetimeIndex of event timestamps
+    """
+    tEvents = []
+    sPos, sNeg = 0, 0
+    diff = gRaw.diff()
+
+    for i in diff.index[1:]:
+        sPos = max(0, sPos + diff.loc[i])
+        sNeg = min(0, sNeg + diff.loc[i])
+
+        if sNeg < -h:
+            sNeg = 0
+            tEvents.append(i)
+
+        elif sPos > h:
+            sPos = 0
+            tEvents.append(i)
+
+    return pd.DatetimeIndex(tEvents)

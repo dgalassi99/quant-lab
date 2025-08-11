@@ -327,9 +327,9 @@ Consider a feture matrix $X$ with $I$ rows drawn from some bars $t = 1, ..., T$ 
 - $y_i = 0$ if $|$r_{t_{i,0},t_{i,0}+h}| <= \tau$
 - $y_i = 1$ if $$r_{t_{i,0},t_{i,0}+h} > - \tau$
 
-where $\tau$ is a constant threshold, $t_{i,0}$ is the index of the bar immediately after $X_i$, $t_{i,0}+h$ is the index of the h-th bar after $t_{i,0}$ and $$r_{t_{i,0},t_{i,0}+h}$ the price return over an horizon $h$.
+where $\tau$ is a constant threshold, $t_{i,0}$ is the index of the bar immediately after $X_i$, $t_{i,0}+h$ is the index of the h-th bar after $t_{i,0}$ and $r_{t_{i,0},t_{i,0}+h}$ the price return over an horizon $h$.
 
-$$ $r_{t_{i,0},t_{i,0}+h} = P_{t_{i,0}+h}/P_{t_{i,0}} -1 $$
+$$ r_{t_{i,0},t_{i,0}+h} = P_{t_{i,0}+h}/P_{t_{i,0}} -1 $$
 
 Great... not really! Usually this method is applied on time bars (whihc we saw ahving poor stat. properties). Second, the same threshold $\tau$ is applied regardells the the volatility. 
 

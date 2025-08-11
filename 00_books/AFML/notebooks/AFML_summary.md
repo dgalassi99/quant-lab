@@ -2,7 +2,7 @@
 
 ## SECTION 1 - DATA ANALYSIS
 
-### Financial Data Structures
+### Chapter 2: Financial Data Structures
 
 #### Types of Financial Data
 
@@ -313,3 +313,38 @@ $$
 $$
 S_t = \max\left( S_{t+},\ S_{t-} \right)
 $$
+
+
+### Chapter 3: Labelling
+
+In this chapter we learn how to label financial data to retrieve features for supervised learning models.
+
+#### The Fixed-Horizon Method
+
+Consider a feture matrix $X$ with $I$ rows drawn from some bars $t = 1, ..., T$ with $T>I$. An observation $X_i$ is assigned to a label $y_i$:
+
+- $y_i = -1$ if $r_{t_{i,0},t_{i,0}+h} < - \tau$
+- $y_i = 0$ if $|$r_{t_{i,0},t_{i,0}+h}| <= \tau$
+- $y_i = 1$ if $$r_{t_{i,0},t_{i,0}+h} > - \tau$
+
+where $\tau$ is a constant threshold, $t_{i,0}$ is the index of the bar immediately after $X_i$, $t_{i,0}+h$ is the index of the h-th bar after $t_{i,0}$ and $$r_{t_{i,0},t_{i,0}+h}$ the price return over an horizon $h$.
+
+$$ $r_{t_{i,0},t_{i,0}+h} = P_{t_{i,0}+h}/P_{t_{i,0}} -1 $$
+
+Great... not really! Usually this method is applied on time bars (whihc we saw ahving poor stat. properties). Second, the same threshold $\tau$ is applied regardells the the volatility. 
+
+Can we solve these problmes? Partially by:
+- Computing a dynamic threshold $\sigma_{t_{i,0}}$ by computing a rolling exponentually weighted std of returns.
+- Using volume/dollar bars
+ 
+Why partially? Because this method does not allow us to intriduce a stop-loss (SL) or take-profit (TP) strategies. Hence, this method will result unrealistic in real operations!
+
+#### The Triple-Barrier Method 
+
+Label an obs. according to the first barrier it touches. We have:
+
+- Two horizontal barriers representing the touch of TP/SL which label the obs. as +-1
+- One vertical barrier touched after a given amount of elapsed bars ($h$) which labels the obs. as 0
+
+We have to note that: (1) to label an obs. we neet to take into account the the entire path spanning $[t_{i,0},t_{i,0}+h]$; (2) we denote by $t_{i,1}$ the time of the first touch; (3) the horizontal barriers are not necessarily symmetric.
+

@@ -348,3 +348,14 @@ Label an obs. according to the first barrier it touches. We have:
 
 We have to note that: (1) to label an obs. we neet to take into account the the entire path spanning $[t_{i,0},t_{i,0}+h]$; (2) we denote by $t_{i,1}$ the time of the first touch; (3) the horizontal barriers are not necessarily symmetric.
 
+#### Size and Side
+
+Now we want to understand how an ML algo. can learn both side and size of a trade. Ne need to elarn teh side when we do not have a model to set the sign (long/short) of our position. How do we recognize TP or SL in this situation?
+
+
+
+### Section 5
+
+#### Multiprocessing and Vectorization
+
+A process is a fully independent program with its own memory. Hence, multiprocessing means running several processes that do not share memory. In PY this is the best way to achieve true parallelization.

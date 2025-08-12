@@ -111,3 +111,22 @@ def DollarBarsDfVectorized(df, dollar_per_bar):
         })
     
     return pd.DataFrame(bars)
+
+# --- GET THE TARGET RETURN FOR THE TRIPLE BARRIER METHOD --- #
+
+def GetTargetforTBM(close, ema_periods):
+    """
+    close: pd.Series di prezzi indicizzati da timestamp arbitrari (anche intraday)
+    span0: span per la media mobile esponenziale della volatilità
+    Restituisce: pd.Series della volatilità stimata (deviazione std dei ritorni log)
+    """
+
+    # calcola i ritorni logaritmici
+    log_ret = np.log(close).diff()
+
+    # stima la volatilità come deviazione standard mobile esponenziale dei ritorni logaritmici
+    vol = log_ret.ewm(span=ema_periods).std()
+    # fill teh starting Nan created by the emw
+    vol = vol.bfill()
+
+    return vol

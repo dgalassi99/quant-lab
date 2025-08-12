@@ -309,4 +309,6 @@ def getTBMLabels(events, close):
     # Assign bins based on return sign (+1, 0, -1)
     out['bin'] = np.sign(out['ret'])
 
+    out['t1'] = events_['t1']  # include event end time
+
     return out

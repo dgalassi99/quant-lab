@@ -9,3 +9,10 @@
 # 25-07-2025
 - finish chapter 2 of AFML
 - start chapter's 2 exercises
+
+# 11-08-2025
+- chapter 3 of AFML
+
+# 12-08-2025
+- start exercises of chap 3 AFML
+- TBM & CUSUM ipynb notebook

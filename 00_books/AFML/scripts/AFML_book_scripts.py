@@ -157,29 +157,39 @@ def compute_non_negative_rolled_price_index(df,
 def get_CUSUM_events(gRaw, h):
     """
     Symmetric CUSUM filter to detect events in a time series.
-
-    Parameters:
-    - gRaw: pd.Series, the raw time series (e.g. price)
-    - h: float, threshold to signal a new event
-
-    Returns:
-    - pd.DatetimeIndex of event timestamps
+    
+    Parameters
+    ----------
+    gRaw : pd.Series
+        Raw time series (e.g., close prices).
+    h : float or pd.Series
+        Threshold to signal a new event.
+        Can be a scalar or a time-indexed Series.
+    
+    Returns
+    -------
+    pd.DatetimeIndex
+        Event timestamps where the filter was triggered.
     """
     tEvents = []
     sPos, sNeg = 0, 0
     diff = gRaw.diff()
 
-    for i in diff.index[1:]:
-        sPos = max(0, sPos + diff.loc[i])
-        sNeg = min(0, sNeg + diff.loc[i])
+    is_series = isinstance(h, (pd.Series, np.ndarray))
 
-        if sNeg < -h:
+    for idx in range(1, len(diff)):  # start from second value
+        h_i = h.iloc[idx] if is_series else h
+        val = diff.iloc[idx]
+
+        sPos = max(0, sPos + val)
+        sNeg = min(0, sNeg + val)
+
+        if sNeg < -h_i:
             sNeg = 0
-            tEvents.append(i)
-
-        elif sPos > h:
+            tEvents.append(diff.index[idx])
+        elif sPos > h_i:
             sPos = 0
-            tEvents.append(i)
+            tEvents.append(diff.index[idx])
 
     return pd.DatetimeIndex(tEvents)
 
@@ -247,7 +257,7 @@ def applyTPSLOnT1(close, events, tpsl, molecule):
 
 ### SNIPPET 3.3 - GET EVENTS-----------------------------------------------------------------------#
 
-def getEvents(close, tEvents, ptSl, trgt, minRet, t1):
+def getEvents(close, tEvents, ptSl, trgt, minRet, t1 = False):
     """
     close: pd.Series or prices indexed by datetime
     tEvents: timeindex with timestamps of events selected by a sampling procedure (ex CUSUM)
@@ -312,3 +322,57 @@ def getTBMLabels(events, close):
     out['t1'] = events_['t1']  # include event end time
 
     return out
+
+
+### SNIPPET 3.6 - GetEvents for METALABELLING-----------------------------------------------------------------------#
+
+def getEventsMeta(close, tEvents, ptSl, trgt, minRet, t1= False, side=None):
+    """
+    close: pd.Series or prices indexed by datetime
+    tEvents: timeindex with timestamps of events selected by a sampling procedure (ex CUSUM)
+    ptSl: tuple (tp, sl) take profit e stop loss multipliers (for eventual asymetr)c positioning)
+    trgt: pd.Series of targets expresses in term of abs returns (e.g. 0.02 for 2% target)
+    minRet: min target return to consider an event
+    t1: pd.Series optional for vertical barriers (max holding period), default False (no limit)
+    side: pd.Series with the side of the trade (1 for long, -1 for short), if None it assumes adirectional 
+    
+    retunrs...
+
+    df with:
+    - t1: timestamp at which the first barrier is hit (either tp, sl or vertical barrier)
+    - trgt: target return for the event used to generate the barriers 
+    
+    Note:
+    - to increase th enumebr of t1 = veticla barriers we need to increaet he multipliets tpsl
+    - increasing minret will only filter out more events
+    """
+
+    # filter for only tEvents and consider only those above minRet
+    trgt_subset = trgt.loc[tEvents]
+    trgt_subset = trgt_subset[trgt_subset > minRet]
+
+    #get the vertical barrier
+    if t1 is False:
+        t1= pd.Series(pd.NaT, index=trgt_subset.index)
+
+
+    if side is None:
+        side_ = pd.Series(1., index=trgt.index)
+        ptSl_ = [ptSl[0], ptSl[0]]  # symmetric TP and SL
+    else:
+        side_ = side.loc[trgt.index]
+        ptSl_ = ptSl[:2]  # assume first two elements correspond to TP and SL multipliers 
+    
+    # events dataframe
+    events = pd.concat({'t1': t1, 'trgt': trgt_subset, 'side': side_}, axis=1).dropna(subset=['trgt'])
+
+    # applyTPSLOnT1 (no multiprocessing)
+    df0 = applyTPSLOnT1(close=close, events=events, tpsl=ptSl, molecule=events.index)
+
+    #update t1 wiuth the first event occurring between tp and sl and t1
+    events['t1'] = df0.dropna(how='all').min(axis=1)
+    
+    # remove side column
+    events = events.drop('side', axis=1)
+
+    return events

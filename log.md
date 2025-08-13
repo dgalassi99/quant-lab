@@ -16,3 +16,6 @@
 # 12-08-2025
 - start exercises of chap 3 AFML
 - TBM & CUSUM ipynb notebook
+
+# 13-08-2025
+- continue exercises chap 3 AFML

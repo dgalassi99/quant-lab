@@ -395,6 +395,31 @@ The secondary model’s job is to filter out bad trades by learning from histori
 
 This two-stage approach can significantly improve overall strategy performance by reducing false positives from the primary model.
 
+#### How to Use Meta-Labelling
+
+Once we have a model to determine the side of a bet we need one to determine the size. That is ... *How much money I am willing to bet in this position?*
+
+We have seen that meta-labelling covers this specific question. *When should we specifically use it?*
+
+In binary classification problems we deal with the trade-off between FP and FN errors. The goal is to increase the TP rate but also FP rate will increase.
+
+Definitions:
+- FP: positive instances incorrectly classified positive
+- FN: negative instances incorrectly classified negative
+- TP: positive instances correctly classified positive
+- TN: negative instances correctly classified negative
+- TPR: True Positive Rate --> positive instances correctly classified/positive instances $TP/(TP+FN)$ --> proportion of positive instances that were correctly classified as positive by the model
+- FPR: False Negative Rate --> negative instances incorrecly classfied as positive/negative instances $FP/(FP+TN)$ --> proportion of positive instances that are inaccurately detected as positive
+- Precision: $TP/(TP+FP)$ --> correctly classified positive/all classfied as positive
+- Recall (TPR): $TP/(TP+FN)$ --> correctly classified positive/number of real positives
+- Accuracy: $(TP+TN)/(TP+TN+FN+FP)$ --> correct classficiations/total classifications
+- F1 Score = $2/(1/Precision+1/Recall)$
+The trade off between TPR and FPR is the key problem of binary classification (usually represented on the ROC curve).
+
+This if we aim at improving the precision by lowering FP, this results in an increase of FN (decrease of Recall/TPR) and viceversa. So the usual metric we want to maximie is their harmonic average: F1 Score. Meta-labelling helps us in achieving this result... *how?*
+
+1. Build a model with high recall and low precision (low FN) --> "do not lose opportunities logic"
+2. Apply meta-labelling to the positive predicted by the primary model --> "filter out to keep only good opportunities"
 
 
 ### Section 5

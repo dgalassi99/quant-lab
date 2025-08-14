@@ -376,3 +376,45 @@ def getEventsMeta(close, tEvents, ptSl, trgt, minRet, t1= False, side=None):
     events = events.drop('side', axis=1)
 
     return events
+
+### SNIPPET 3.7 - GetTBMLabels for METALABELLING-----------------------------------------------------------------------#
+
+def getTBMLabelsMeta(events, close):
+    """
+    Compute meta-labels for trend-following events.
+
+    events: DataFrame with
+        - t1: event end timestamp (vertical barrier)
+        - trgt: target return
+        - side (optional): side of the trade (-1/1)
+    close: pd.Series of prices indexed by datetime
+
+    Returns:
+        DataFrame indexed by event start time with:
+        - ret: return during event (multiplied by side if present)
+        - bin: label (0/1 for meta-labeling, -1/1 if no side)
+        - t1: event end timestamp
+    """
+    # 1) Keep events that have an end time
+    events_ = events.dropna(subset=['t1'])
+
+    # 2) Align prices with event start and end times
+    px_index = events_.index.union(events_['t1'].values).drop_duplicates()
+    px = close.reindex(px_index, method='bfill')
+
+    # 3) Create output DataFrame
+    out = pd.DataFrame(index=events_.index)
+    out['ret'] = px.loc[events_['t1'].values].values / px.loc[events_.index] - 1
+
+    # 4) Meta-labeling: multiply by side if it exists
+    if 'side' in events_:
+        out['ret'] *= events_['side']
+        out['bin'] = np.sign(out['ret'])
+        out.loc[out['ret'] <= 0, 'bin'] = 0  # unprofitable → 0
+    else:
+        out['bin'] = np.sign(out['ret'])  # -1/+1
+
+    # 5) Include t1
+    out['t1'] = events_['t1']
+
+    return out

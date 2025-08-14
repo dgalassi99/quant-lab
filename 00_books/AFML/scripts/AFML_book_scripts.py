@@ -367,7 +367,7 @@ def getEventsMeta(close, tEvents, ptSl, trgt, minRet, t1= False, side=None):
     events = pd.concat({'t1': t1, 'trgt': trgt_subset, 'side': side_}, axis=1).dropna(subset=['trgt'])
 
     # applyTPSLOnT1 (no multiprocessing)
-    df0 = applyTPSLOnT1(close=close, events=events, tpsl=ptSl, molecule=events.index)
+    df0 = applyTPSLOnT1(close=close, events=events, tpsl=ptSl_, molecule=events.index)
 
     #update t1 wiuth the first event occurring between tp and sl and t1
     events['t1'] = df0.dropna(how='all').min(axis=1)

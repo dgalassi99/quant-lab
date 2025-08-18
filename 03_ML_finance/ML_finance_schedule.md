@@ -4,15 +4,14 @@ This section introduces supervised ML techniques applied to financial time serie
 
 ---
 
-## Week 9  
-**18/06/2025–25/06/2025**
+## 9  
 
 ### 📚 Theory
-- [ ] Study *Advances in Financial ML* – Ch.2,3
-- [ ] Study *The Science of Algorithmic Trading* – Ch.2  
-- [ ] Review Quantopian Lectures 11–12  
-- [ ] Understand why traditional ML struggles in finance  
-- [ ] Learn about financial features and data stationarity
+- [x] Study *Advances in Financial ML* – Ch.2,3
+- [x] Study *The Science of Algorithmic Trading* – Ch.2  
+- [x] Review Quantopian Lectures 11–12  
+- [x] Understand why traditional ML struggles in finance  
+- [x] Learn about financial features and data stationarity
 
 ### 💻 Practice
 - [ ] Download historical data and compute financial features (returns, vol, momentum, etc.)  
@@ -21,8 +20,7 @@ This section introduces supervised ML techniques applied to financial time serie
 
 ---
 
-## Week 10  
-**26/06/2025–03/07/2025**
+## 10  
 
 ### 📚 Theory
 - [ ] Study *Advances in Financial ML* – Ch.4  
@@ -37,8 +35,7 @@ This section introduces supervised ML techniques applied to financial time serie
 
 ---
 
-## Week 11  
-**04/07/2025–11/07/2025**
+## 11  
 
 ### 📚 Theory
 - [ ] Study *Advances in Financial ML* – Ch.5  
@@ -54,8 +51,7 @@ This section introduces supervised ML techniques applied to financial time serie
 
 ---
 
-## Week 12  
-**12/07/2025–19/07/2025**
+## 12  
 
 ### 📚 Theory  
 - [ ] Read additional materials from López de Prado on model overfitting and cross-validation  

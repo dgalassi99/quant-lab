@@ -14,24 +14,24 @@ This section introduces supervised ML techniques applied to financial time serie
 - [x] Learn about financial features and data stationarity
 
 ### 💻 Practice
-- [ ] Download historical data and compute financial features (returns, vol, momentum, etc.)  
-- [ ] Normalize/standardize features, handle NaNs, and resample for ML  
-- [ ] Use `train_test_split()` to create your dataset  
+- [x] Download historical data and compute financial features (returns, vol, momentum, etc.)  
+- [x] Normalize/standardize features, handle NaNs, and resample for ML  
+- [x] Use `train_test_split()` to create your dataset  
 
 ---
 
 ## 10  
 
 ### 📚 Theory
-- [ ] Study *Advances in Financial ML* – Ch.4  
-- [ ] Review Quantopian Lectures 13–14  
-- [ ] Learn about labeling: fixed horizon, triple-barrier, and event-driven  
-- [ ] Study common pitfalls: lookahead bias, imbalance, data leakage
+- [x] Study *Advances in Financial ML* – Ch.4  
+- [x] Review Quantopian Lectures 13–14  
+- [x] Learn about labeling: fixed horizon, triple-barrier, and event-driven  
+- [x] Study common pitfalls: lookahead bias, imbalance, data leakage
 
 ### 💻 Practice
-- [ ] Implement binary labels using return thresholds  
-- [ ] (Optional) Explore triple-barrier labeling as per López de Prado  
-- [ ] Visualize label distributions and class imbalance  
+- [x] Implement binary labels using return thresholds  
+- [x] (Optional) Explore triple-barrier labeling as per López de Prado  
+- [x] Visualize label distributions and class imbalance  
 
 ---
 

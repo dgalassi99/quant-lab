@@ -504,8 +504,98 @@ The benefits are that:
 
 We can check the sequantial bootsrap by generating random label intervals. Each observation starts at a random bar and spand a random number of bars (we can set a max number of bars maxH). Once we have this randomly generated t1 we can test the average uniqueness of the labels when using a classing sampling with replacement bootstrap or our sequential bootstrap 
 
+#### Return Attribution
 
+We will now disucss how to assign weights to observations in order to take into account that: (1) overlapping outcomes are overweighted compared to non-overlapping ones; (2) labels associated with higher absolute returns should weight more.
 
+When labels are fucntion of the return sign ({-1,1} for standard labelling {0,1} for meta-labelling) the sample weights are $v_i$. Summing per bar return over the event lifespan and correcting for concurrency. Then we normalize $v_i$ to get $w_i$ whicha re summing to 1.
+
+$$ v_i = \left| \sum_{t = t_{i,0}}^{t_{i,1}} \frac{r_{t-1,t}}{c_t} \right| $$
+
+$$ w_i = \frac{v_i}{\sum_{i=1}^{I} v_i} $$
+
+The idea is to weight an observation as a function of the absolute log return that can uniquely be attributed to it. Using a weight inverse to the return would overweight low-return events whihc we indeed filter out as we have ssen in the previous chapters.
+
+#### Time Decay
+
+As markets adapt we might want to underweight older observation. To do it we will adjust our weights by a decay vector $d(x)$ which depends on the cumulative uniquenss of $x$ of the events. This measures how much an event's "signal" is unique relative to other overlapping events. The decay is applied along uniquenss and not strinctly on chronological time.
+
+$$ x \in \left[0, \sum_{i=1}^{I} u_i\right] $$
+
+We aim at a linear piecewise decay function of hte form: $d(x) = \max{[0,a+bx]}$
+
+Case (a): $c \in [0,1]$  *(light decay for older events)*
+
+The user sets $c = d[1]$ the minimum relative weight of the first event compared to the last event. We solve for slope $b$ and intercept $a$:
+
+1. Final weight condition: $a + b \sum_{i=1}^I u_i = 1$ which implies $a = 1 - b \sum_{i=1}^I u_i$
+
+2. First weight condition: $a + b \cdot 0 = c$ which implies $b = \frac{1-c}{\sum_{i=1}^I u_i}$
+
+Case (b): $c \in (0,-1)$  *(heavy decay - some events assingd to zero)*
+
+Here the user specifies a negative $c$, so that some older events are completely ignored.  
+
+1. Condition at cutofff: $a - b c \sum_{i=1}^I u_i = 0$ which implies $b = \frac{1+c}{\sum_{i=1}^I u_i}$
+
+2. From final weight condition: $a = 1 - b \sum_{i=1}^I u_i$
+
+This is a sort of double correction on weights by uniqueness and by time. Let's visualize an example.
+
+Say we have 5 events with uniqueness weights as following and we apply a linear decay factor assuming cumulative uniqueness is simply the cumulative sum of the weights:
+
+| Event | $w_i$ | x (cumsum) |
+| ----- | ----- | ---------- |
+| 1     | 0.2   | 0.2        |
+| 2     | 0.3   | 0.5        |
+| 3     | 0.1   | 0.6        |
+| 4     | 0.25  | 0.85       |
+| 5     | 0.15  | 1.0        |
+
+Now we pick a light decay parameter $c = 0.5$ and find $a$ and $b$:
+
+| Event | x    | $d[x] = \max(0, 0.5 + 0.5 x)$ |
+| ----- | ---- | ----------------------------- |
+| 1     | 0.2  | 0.5 + 0.5\*0.2 = 0.6          |
+| 2     | 0.5  | 0.5 + 0.5\*0.5 = 0.75         |
+| 3     | 0.6  | 0.5 + 0.5\*0.6 = 0.8          |
+| 4     | 0.85 | 0.5 + 0.5\*0.85 = 0.925       |
+| 5     | 1.0  | 0.5 + 0.5\*1 = 1.0            |
+
+Then the final weights are:
+
+| Event | $w_i$ | $d[x]$ | $w_i^{\text{final}}$ |
+| ----- | ----- | ------ | -------------------- |
+| 1     | 0.2   | 0.6    | 0.12                 |
+| 2     | 0.3   | 0.75   | 0.225                |
+| 3     | 0.1   | 0.8    | 0.08                 |
+| 4     | 0.25  | 0.925  | 0.23125              |
+| 5     | 0.15  | 1.0    | 0.15                 |
+
+We observe that:
+
+- We want to down-weight redundant labels, because too many overlapping events bias the sample.
+- If we only use uniqueness as weights, that handles redundancy locally (event by event).
+- Time-decay adds another correction: “older” information should be discounted relative to the stream of unique information coming in.
+
+Why cumulative uniquenss and not just time?
+- If we used plain chronological time: early events are penalized just for being early, even if they were unique.
+- With cumulative uniqueness: we think in terms of how much fresh unique information has entered the system so far.
+- We’re treating “age” not in terms of the clock, but in terms of the information budget already consumed. It’s like saying:
+“I don’t care if this observation happened 2 hours ago. What matters is: how much new, non-redundant signal have we seen since then?
+
+It is worth to note some special cases:
+- $c = 1$ means no decay
+- $0<c<1$ means that weights decay linearly, but all observations will have a weights different than 0
+- $c=0$ means that weights decay linearly to zero
+- $c<0$ means that the oldest portion of obs. are eliminated (weights are set to zero)
+
+#### Class Weights
+
+While sample weights adjust the importance of each observation, class weights adjust the importance of each label (class). Say we have a case in which the data is unbalanced where 99.9% of times is +1 (normal days) and 0.1% is -1 (market crash). The model will erach 99.9% accuracy just by always predictiong =1, but it will never spot a financial crisis. Hence, we need to increase the class weight of the rare events (improving recall).
+
+- Pass class_weight = 'balanced' which sets class weights inversely proportional to class frequency
+- Pass class_weight = 'balanced_subsample' whihc does the same but inside each bootstrap sample rahter than in the entire dataset
 
 ## Section 5
 

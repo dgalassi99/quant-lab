@@ -441,7 +441,7 @@ Then the series of labels are not IID. Now, we could resctrict the intervals hor
 
 #### Number of Concurrent Labels
 
-A label $y_i$ is a function of th ereturns in its interval $[t_{i,0} , t_{i,1}]$. Now, a return $r_{t-1,t}$ is the return occurring between price points $p_{t-1}$ and $p_t$. We say that labels are concurrent in $t$ if they include this return in their time intervals.
+A label $y_i$ is a function of the returns in its interval $[t_{i,0} , t_{i,1}]$. Now, a return $r_{t-1,t}$ is the return occurring between price points $p_{t-1}$ and $p_t$. We say that labels are concurrent in $t$ if they include this return in their time intervals.
 
 Define for each $t$ and $y_i$ a binary array $1_{t,i}$. This is 1 if $[t_{i,0} , t_{i,1}]$ overlaps $[t-1, t]$ and 0 otherwise. We can then compute the number of concurrent labels at $t$ as:
 

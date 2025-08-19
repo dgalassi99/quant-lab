@@ -1,5 +1,5 @@
 # quant-trading-self-study
-My 9-month self-directed program to deep dive into financial engineering, quant analysis and trading strategies
+My self-directed program to deep dive into financial engineering, quant analysis and trading strategies
 
 ## Useful Links
 - GitHub repository with 56 lectures (video+notebook): https://gist.github.com/ih2502mk/50d8f7feb614c8676383431b056f4291

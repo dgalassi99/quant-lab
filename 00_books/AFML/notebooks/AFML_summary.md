@@ -421,9 +421,88 @@ This if we aim at improving the precision by lowering FP, this results in an inc
 1. Build a model with high recall and low precision (low FN) --> "do not lose opportunities logic"
 2. Apply meta-labelling to the positive predicted by the primary model --> "filter out to keep only good opportunities"
 
+### Chapter 4: Sampling Weights
 
-### Section 5
+In this chapter we learn how to deal with the fact that financial observations are not IID.
 
-#### Multiprocessing and Vectorization
+#### Overlapping Outcomes
+
+Given a observed feature $X_i$ we can assign a label $y_i$ function of bars occurred between $t_{i,0}$ and $t_{i,1}$. Now suppose that $t_{i,1} > t_{i,0}$ then $y_i$ and $y_j$ depend on a common return. 
+
+For example:
+| Label | Interval      | Start $t_0$       | End $t_1$         | Return |
+| ----- | ------------- | ----------------- | ----------------- | ------ |
+| $y_1$ | 09:00 → 09:02 | $t_{1,0} = 09:00$ | $t_{1,1} = 09:02$ | 0.02   |
+| $y_2$ | 09:01 → 09:03 | $t_{2,0} = 09:01$ | $t_{2,1} = 09:03$ | 0.0198 |
+
+Then the series of labels are not IID. Now, we could resctrict the intervals horizon to prevent this, but this reduces our horizon to the frequency of the observations itself... not a great idea.
+
+*How to we tackle the non IIDness of financial observations?*
+
+#### Number of Concurrent Labels
+
+A label $y_i$ is a function of th ereturns in its interval $[t_{i,0} , t_{i,1}]$. Now, a return $r_{t-1,t}$ is the return occurring between price points $p_{t-1}$ and $p_t$. We say that labels are concurrent in $t$ if they include this return in their time intervals.
+
+Define for each $t$ and $y_i$ a binary array $1_{t,i}$. This is 1 if $[t_{i,0} , t_{i,1}]$ overlaps $[t-1, t]$ and 0 otherwise. We can then compute the number of concurrent labels at $t$ as:
+
+$$
+c_t = \sum_{i=1}^I 1_{t,i} 
+$$
+
+#### Average Uniqueness of a Label
+
+Given a label $y_i$ at time $t$ we can define:
+- Uniqueness of a label: $u_{t,i} = 1_{t,i} c_t^{-1}$
+- Average uniqueness of a label: $u_i$ = $\frac{\sum_{t=1}^T u_{t,i}}{\sum_{t=1}^T 1_{t,i}}$
+
+Generally speaking, we expect $u_i <1$ and the more it gets close to 1 the more the label is unique (no-overlap). It must be noted that, calcualting the average uniqueness requires infomration about the future, but this is not an issue as $u_i$ is only used on the training set, hence there is no data leakage.
+
+#### Bagging Classifiers and Uniqueness 
+
+Suppose we drawn with replacement (boostrapping) observations. Now after $I$ drawns the probability of picking $i$ os $(1-I^-1)^I$. As the sample size grows this probability converges to $1/e$. Hnece, the number of unique observation draws is expected to be $1-1/e ~ 2/3$.
+
+Now, if the maximum number of non-overlapping outcomes is $K<I$ we can't pick $I$ times because of overlap, thus the number of unique obs. drawn is $1-e^{-K/I} < 1-e^{-1}$. This means that assuming IID leads to oversampling!
+
+When $I^{-1} \sum_{i=1}^I u_i << 1$ (that is there is a lot of overlaping) it becomes increasingly likely that in-bag observations will be 
+1. Redundant
+2. Very similar to OOB obs. (we treat this in chap. 7)
+
+Making the boostrap inefficient. For example, in Random Forest we will have a lot of similar and overfitted trees.
+
+What do we do? 
+
+1. Drop overlapping outcomes. This, tho, results in data/information loss.
+2. Use the average uniqueness information to reduce the influence of outcomes containing redundant info by only sampling a fraction of obs out['tW'].mean() or a multiple of this (can be used in max_samples arguemnt in sklearn.ensemble.BaggingClassifier). This way IB obs. are not sampled at frequencies higher than their uniqueness.
+3. Use sequential boostrap...
+
+##### Sequential Bootstrap
+
+In sequantial bootstrap drawns are made according to a change in probability that controls for redundancy. An observation $X_i$ is picked from a uniform distribution $i$ ~ $U[1,I]$. That is the probability to be picked is $\delta_i^{(1)} = I^{-1}$ and overlap among labels are ingored.
+
+Now, ww proceed like this:
+1. Pick the first obs with probability $\delta_i^{(1)} = I^{-1}$ and denote by $\phi^{(1)} = {i}$ the sequence of chosen samples so far
+2. For the next candidate $j$, we measure its uniqueness relative to what's already drawn (if j overlaps a lot to the chosen lables the denominator increases and the uniqueness shrinks)
+
+$$ u_{t,j}^{(2)} = \frac{1_{t,j}}{1+\sum_{k \in \mathbf{\phi^{(1)}}} 1_{t,k}} $$
+
+3. Then the average uniquenss over the lifespan of j (scores how unique is label $j$ at this step) is:
+
+$$ u_j^{(2)} = \frac{\sum_{t=1}^T u_{t,j}}{\sum_{t=1}^T 1_{t,j}} $$
+
+4. Finally, update the likelihood of the second drawn to reduce the chance of picking overlapped labels:
+
+$$ \delta_j^{(2)} = \frac{u_j^{(2)}}{\sum_{k=1}^I u_k^{(2)}} $$
+
+Note that those $\delta_j^{(2)}$ are scaled to sum to 1. Now we can do another drawn, update $\phi^{(2)}$ and re-evaluate $\delta_j^{(3)}$. This process continues until $I$ drawns are made.
+
+The benefits are that:
+- Overlaps/repetitions are still possible
+- Overlaps/repetitions are increasingly less likely
+- Teh bootrap sample will be close to an IID sample 
+
+## Section 5
+
+
+### Chapter 20: Multiprocessing and Vectorization
 
 A process is a fully independent program with its own memory. Hence, multiprocessing means running several processes that do not share memory. In PY this is the best way to achieve true parallelization.

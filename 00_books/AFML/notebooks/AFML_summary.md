@@ -1,4 +1,4 @@
-# ADVANCES IN FINANCIAL MACHINE LEARNING: RESUME
+he# ADVANCES IN FINANCIAL MACHINE LEARNING: RESUME
 
 ## SECTION 1 - DATA ANALYSIS
 
@@ -498,7 +498,14 @@ Note that those $\delta_j^{(2)}$ are scaled to sum to 1. Now we can do another d
 The benefits are that:
 - Overlaps/repetitions are still possible
 - Overlaps/repetitions are increasingly less likely
-- Teh bootrap sample will be close to an IID sample 
+- The bootrap sample will be close to an IID sample 
+
+##### Monte Carlo Experiments 
+
+We can check the sequantial bootsrap by generating random label intervals. Each observation starts at a random bar and spand a random number of bars (we can set a max number of bars maxH). Once we have this randomly generated t1 we can test the average uniqueness of the labels when using a classing sampling with replacement bootstrap or our sequential bootstrap 
+
+
+
 
 ## Section 5
 

@@ -12,3 +12,5 @@ ipykernel
 yfinance
 plotly
 quandl
+statsmodels
+scipy

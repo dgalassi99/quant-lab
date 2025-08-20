@@ -1,5 +1,7 @@
-# quant-trading-self-study
-My self-directed program to deep dive into financial engineering, quant analysis and trading strategies
+# Learning Programme
+Main folder of the repository containing my self-directed program to deep dive into financial engineering, quant analysis and trading strategies
+
+In parallel quant-lab/book_projects contains summaries, exercises, scripts and much more of the books that are needed to be studied in order to complete this self-learning programme
 
 ## Useful Links
 - GitHub repository with 56 lectures (video+notebook): https://gist.github.com/ih2502mk/50d8f7feb614c8676383431b056f4291

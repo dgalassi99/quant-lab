@@ -305,21 +305,41 @@ def getEvents(close, tEvents, ptSl, trgt, minRet, t1 = False):
 ### SNIPPET 3.5 - TRIPLE BARRIER METHOD LABELLING-----------------------------------------------------------------------#
 
 def getTBMLabels(events, close):
+    """
+    Compute meta-labels for trend-following events.
+
+    events: DataFrame with
+        - t1: event end timestamp (vertical barrier)
+        - trgt: target return
+        - side (optional): side of the trade (-1/1)
+    close: pd.Series of prices indexed by datetime
+
+    Returns:
+        DataFrame indexed by event start time with:
+        - ret: return during event (multiplied by side if present)
+        - bin: label (0/1 for meta-labeling, -1/1 if no side)
+        - t1: event end timestamp
+    """
     # 1) Align prices with event start and end times (t1)
     events_ = events.dropna(subset=['t1'])  # keep events that have an end time
     px = events_.index.union(events_['t1'].values).drop_duplicates()  # union of start and end times
     px = close.reindex(px, method='bfill')  # get prices at these times, backfill missing
 
-    # 2) Create output DataFrame indexed by event start times
+    # 3) Create output DataFrame
     out = pd.DataFrame(index=events_.index)
-
-    # Calculate return between event start and end time
     out['ret'] = px.loc[events_['t1'].values].values / px.loc[events_.index] - 1
 
-    # Assign bins based on return sign (+1, 0, -1)
-    out['bin'] = np.sign(out['ret'])
+    # 4) Meta-labeling: multiply by side if it exists
+    if 'side' in events_:
+        out['ret'] *= events_['side']
+        out['bin'] = np.sign(out['ret'])
+        out.loc[out['ret'] <= 0, 'bin'] = 0  # unprofitable → 0
+    else:
+        out['bin'] = np.sign(out['ret'])  # -1/+1
 
-    out['t1'] = events_['t1']  # include event end time
+    # 5) Include t1
+    out['t1'] = events_['t1']
+    out['hit_first'] = events_['hit_first']
 
     return out
 
@@ -368,12 +388,11 @@ def getEventsMeta(close, tEvents, ptSl, trgt, minRet, t1= False, side=None):
 
     # applyTPSLOnT1 (no multiprocessing)
     df0 = applyTPSLOnT1(close=close, events=events, tpsl=ptSl_, molecule=events.index)
-
+    # save the first hit (tp, sl, or t1) in a new column
+    first_hits = df0.dropna(how='all').idxmin(axis=1)  # returns 'tp', 'sl', or 't1'
+    events['hit_first'] = first_hits.map({'tp': 'tp', 'sl': 'sl', 't1': 'vb'})
     #update t1 wiuth the first event occurring between tp and sl and t1
     events['t1'] = df0.dropna(how='all').min(axis=1)
-    
-    # remove side column
-    events = events.drop('side', axis=1)
 
     return events
 
@@ -414,7 +433,8 @@ def getTBMLabelsMeta(events, close):
     else:
         out['bin'] = np.sign(out['ret'])  # -1/+1
 
-    # 5) Include t1
+    # 5) Include t1 and hit first
     out['t1'] = events_['t1']
+    out['hit_first'] = events_['hit_first']
 
     return out

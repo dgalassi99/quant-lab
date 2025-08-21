@@ -76,4 +76,35 @@ In practice we don't have infinite observations, hence...
 This creates inconsistency has the beginning of the series will have less memory than the end. We can evalaute a "relative weight-loss" as:
 
 $$ \lambda_j = \frac{\sum_{h=T-j}^T |\omega_j|}{\sum_{i=0}^{T-j} |\omega_j|} $$
-  
+
+So when $\lambda_j$ is large it means we lost a lot of memory. But we can define a threshold $0<\tau<1$ and say we can accept a memory loss such that $\lambda_j < \tau$ but $\lambda_{j+1} > \tau$ and then we drop the first $j$ points ensuring that the usable portion of the series has consistent memory.
+
+In the extreme cases:
+
+- $d=1$ --> $\lambda_j = 0$ for $j>1$ and we just drop the first point $Z_1$
+- $d=0^+$ --> weights decay very slow --> need for a lot of data for memory stabilization --> need to drop a lot of early data
+
+Still, an issue occurs. Since fractional differencing uses negative weights for early lags, when we expand the window these negative weights accumulate introducing a downward drift in the series. 
+
+### Fixed-Width Window Fractional Differencing
+
+As we said in the method before negative weights accumulate because each new point will use more weight than the earliers ones and this creates a negative drift. So we can truncate the weight sequence once it gets too small to matter.
+
+- Find the smallest $j$ such that $|\omega_j|>=\tau$ and $|\omega_{j+1}|<=\tau$
+- Define new truncated weights where we send $\omega_k = 0$ whenever $k>j$
+
+This presents a lot of advantages such that: (1) the process is stationary; (2) the process still preserves long memory; (3) the distribution becomes less gaussian with longer and fat tails (more similar to real financial returns).
+
+Note that usually we set $\tau$ between $10^{-5}$ and $10^{-3}$ as if too big we lose too much memory, if too small we increase the computational cost. 
+
+## Stationarity with Maximum Memory Preservation
+
+In financial prices, we often find $0<d<<1$ --> They are mildly non-stationary: enough memory that you can forecast, but not so much that they drift forever.
+
+But the standard practice in finance is to apply full integer differencing ($d=1$) --> compute returns --> the series is stationary, but it kills way too much memory --> predictive information is lost.
+
+Differently, FFD lets us stop at just enough differencing. For example, on a series of E-mini futures we get the following results:
+
+- Original log-prices --> ADF statistic = –0.3387 --> not stationary (above critical value –2.8623).
+- Returns ($d=1$) --> ADF = –46.91 --> strongly stationary, but correlation with original series = 0.03 --> almost all memory destroyed.
+- Fractional differencing at $d$ ~ 0.35 --> ADF crosses –2.8623 --> stationary achieved and correlation with original series = 0.995 --> nearly all memory preserved.

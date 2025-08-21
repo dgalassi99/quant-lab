@@ -108,3 +108,27 @@ Differently, FFD lets us stop at just enough differencing. For example, on a ser
 - Original log-prices --> ADF statistic = –0.3387 --> not stationary (above critical value –2.8623).
 - Returns ($d=1$) --> ADF = –46.91 --> strongly stationary, but correlation with original series = 0.03 --> almost all memory destroyed.
 - Fractional differencing at $d$ ~ 0.35 --> ADF crosses –2.8623 --> stationary achieved and correlation with original series = 0.995 --> nearly all memory preserved.
+
+## Using the ADF Test
+
+ADF (Augmented Dickey-Fueller) test is used to check series stationarity.
+
+It tests the null hypothesis $H_0$ --> the series has an unit root (is non-stationary since it has a stochastic trens with mean and variance changing overtime) against $H_1$ --> the series is stationary.
+
+The basic idea is to model the time series {$X_t$} as:
+
+$$
+\Delta X_t = \alpha + \beta t + \gamma X_{t-1} + \sum_{i=1}^{p} \delta_i \, \Delta X_{t-i} + \epsilon_t
+$$
+
+where:
+
+- $$\Delta X_t = X_t - X_{t-1}$$ is the first difference of the series.  
+- $$\alpha$$ is a constant term.  
+- $$\beta t$$ is an optional deterministic trend term.  
+- $$p$$ is the number of lagged differences included to remove autocorrelation.  
+- $$\epsilon_t$$ is white noise.
+
+If $\gamma=0$ the series is non stationary, else if $\gamma<0$ the series is stationary. Generally, it returns a test statistic (a number) that we need to compare with tabulated critical values (-1%, -5%, -10% significance). For example, the 5% (95% confidence) critical value is -2.8623. If the test statistic is greater than the critical value $H_0$ is not rejected --> the series is non-stationary.
+
+

@@ -40,7 +40,40 @@ Where the values $X = [X_t, X_{t-1}, ..., X_{t-k}, ...]$ and weights vector $\om
 - $\omega_2 = \frac{d(d-1)}{2!}, \quad$
 - $\omega_3 = -\frac{d(d-1)(d-2)}{3!}, \quad \dots$
 
-Now when $d$ is an integer the term $\frac{\prod_{i=0}^{k-1} (d-i)}{k!} = 0$ and memory is cancelled when $d<k$. As an example with $d=1$ the weight look like $\omega = [1,-1,0,0,...]$.
+Now when $d$ is an integer the term $\frac{\prod_{i=0}^{k-1} (d-i)}{k!} = 0$ and memory is cancelled when $d<k$. For example when:
 
+- $d=1$ --> $\omega = [1,-1,0,0,...]$ --> plain returns, all memory is erased after 1 lag.
+- $d=2$ --> $\omega = [1,-2,1,0,...]$ --> keeps only 2 lags.
+- But when it is fractional all memory is kept (infinite memory) and it gradually decreases the more we go back
 
+### Iterative Estimation
+
+Instead of calculating the binomial expansion we can iteratively generate weights with this formula:
+
+- $\omega_0 = 1, \quad$
+- $\omega_k = -\omega_{k-1}\frac{d-k+1}{k}$
+
+### Convergence 
+
+Now we note that:
+
+- $\frac{\omega_k}{\omega_{k-1}} = -\frac{d-k+1}{k}$ which for increasing $k$ converges (if we take the abs. value) to 1 --> well-defined and stationary
+- The sign is alternated --> memory does not accumulate forever
+- For $0<d<1$ the weights are always between -1 and 0 (excluding $\omega_0 = 1, \quad$) --> gentle negative decrease stabilizing the process
+
+## Implementation
+
+Let's explore two alternative implementations of fractional differentiation: the standard “expanding window” method and the “fixed-width window fracdiff” (FFD).
+
+### Expanding Window 
+
+In practice we don't have infinite observations, hence...
+
+- The last instance $Z_T$ will have weights $\omega_0, \omega_1, ... \omega_{T-1}$ --> uses all the memory
+- The $T-j$th instance $Z_{T-j}$ will have weights $\omega_0, \omega_1, ... \omega_{T-j-1}$ --> uses some memory
+- The first instances will use only a bit of memory...
+
+This creates inconsistency has the beginning of the series will have less memory than the end. We can evalaute a "relative weight-loss" as:
+
+$$ \lambda_j = \frac{\sum_{h=T-j}^T |\omega_j|}{\sum_{i=0}^{T-j} |\omega_j|} $$
   

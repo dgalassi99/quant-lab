@@ -31,3 +31,10 @@ BIG CHANGE --> rescructure the repo into two main folders learning_programme whi
 Other changes/updates
 - solved merging issues after worked online for the entirety of the week (from 13/08 to 19/08/2025)
 - recover the code I wrote on an online colab into the respective files  
+
+### 21-08-2025
+- work on the stationarity-memory trade off
+
+# 22-08-2025
+- create and finish classification_with_fractional_differencing.ipynb
+- finish an important step -- SECTION 1 OF AFML -- DATA ANALYSIS IS NOW DONE -- NEXT TIME WE START WITH MODELLING! Let's goooo

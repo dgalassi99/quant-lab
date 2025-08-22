@@ -1,3 +1,6 @@
+import numpy as np
+import pandas as pd
+
 ### SNIPPET 3.1 - GET DAILY VOLATILITY ESTIMATES -----------------------------------------------------------------------#
 
 def GetDailyVol(close, span0=100):

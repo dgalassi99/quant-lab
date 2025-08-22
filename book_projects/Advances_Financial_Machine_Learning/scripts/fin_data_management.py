@@ -217,6 +217,7 @@ def TickBarsDf(df,ticks_per_bar):
 # --- FORM VOLUME BARS --- #
 
 def VolumeBarsDf(df,volume_per_bar):
+    '''Takes a df with prices, volume and datetime'''
     bars = [] #list to store the bars
     cum_vol = 0 #counter of cumulative volume starts at 0
     idx = 0 #index starts at 0
@@ -241,6 +242,7 @@ def VolumeBarsDf(df,volume_per_bar):
 ### USE THE VECTORIZZED VERSION WHEN DF >~ 10e+5 observations ###
 
 def VolumeBarsDfVectorized(df,volume_per_bar):
+    '''Takes a df with prices, volume and datetime'''
     df.copy()
     cum_vol = df.volume.cumsum().values #cumulative volume
     n_bars = int(cum_vol[-1]//volume_per_bar) #round down integer of tot vol / vol x bar
@@ -266,6 +268,46 @@ def VolumeBarsDfVectorized(df,volume_per_bar):
     return pd.DataFrame(bars)
     
 # --- FORM DOLLAR BARS --- #
+
+def DollarBarsDf(df, dollar_per_bar):
+    """
+    Create dollar bars from tick data using a simple loop-based method.
+
+    Args:
+        df (pd.DataFrame): must contain ['price', 'volume', 'datetime']
+        dollar_per_bar (float): target dollar value per bar
+
+    Returns:
+        pd.DataFrame: dollar bars with OHLC, volume, dollar_volume, start and end dates
+    """
+    bars = []
+    cum_dollar = 0  # cumulative dollar counter
+    idx = 0         # starting index of current bar
+
+    df = df.copy()
+    df['dollar_value'] = df['price'] * df['volume']
+
+    for i, dv in enumerate(df['dollar_value']):
+        cum_dollar += dv
+
+        if cum_dollar >= dollar_per_bar:
+            if i + 1 > idx:
+                bar = df.iloc[idx:i+1]
+                bars.append({
+                    'open': bar['price'].iloc[0],
+                    'high': bar['price'].max(),
+                    'low': bar['price'].min(),
+                    'close': bar['price'].iloc[-1],
+                    'volume': bar['volume'].sum(),
+                    'dollar_volume': bar['dollar_value'].sum(),
+                    'start_date': bar['datetime'].iloc[0],
+                    'end_date': bar['datetime'].iloc[-1]
+                })
+                cum_dollar = 0  # reset cumulative dollar
+                idx = i + 1     # start next bar from the next tick
+
+    return pd.DataFrame(bars)
+
 
 ### DIRECTLY THE VECTORIZZED VERSION  ###
 

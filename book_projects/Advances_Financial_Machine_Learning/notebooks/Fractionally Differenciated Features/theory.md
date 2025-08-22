@@ -70,21 +70,37 @@ Let's explore two alternative implementations of fractional differentiation: the
 In practice we don't have infinite observations, hence...
 
 - The last instance $Z_T$ will have weights $\omega_0, \omega_1, ... \omega_{T-1}$ --> uses all the memory
-- The $T_j$th instance $Z_{T-j}$ will have weights $\omega_0, \omega_1, ... \omega_{T-j-1}$ --> uses some memory
+- The $T_j$ th instance $Z_{T-j}$ will have weights $\omega_0, \omega_1, ... \omega_{T-j-1}$ --> uses some memory
 - The first instances will use only a bit of memory...
+
+Suppose we have a series of only 3 observations $X_1, X_2 and X_3$ we can compute:
+
+- $Z_3 = \omega_0 X_3 + \omega_1 X_2 + \omega_2 X_1$
+- $Z_2 = \omega_0 X_2 + \omega_1 X_1$
+- $Z_1 = \omega_0 X_1$
 
 This creates inconsistency has the beginning of the series will have less memory than the end. We can evalaute a "relative weight-loss" as:
 
 $$ \lambda_j = \frac{\sum_{h=T-j}^T |\omega_j|}{\sum_{i=0}^{T-j} |\omega_j|} $$
 
-So when $\lambda_j$ is large it means we lost a lot of memory. But we can define a threshold $0<\tau<1$ and say we can accept a memory loss such that $\lambda_j < \tau$ but $\lambda_{j+1} > \tau$ and then we drop the first $j$ points ensuring that the usable portion of the series has consistent memory.
+So when $\lambda_j$ is large for early observations as we can;t have a lot of weights since there are not lagged observations and decreases forward in the series. But we can define a tolerable memory loss threshold $0<\tau<1$ and say we can accept the sereis starting at index $j$ such that $\lambda_j < \tau$ but $\lambda_{j+1} > \tau$ and then we drop the first $j$ points ensuring that the usable portion of the series has consistent memory.
 
 In the extreme cases:
 
 - $d=1$ --> $\lambda_j = 0$ for $j>1$ and we just drop the first point $Z_1$
 - $d=0^+$ --> weights decay very slow --> need for a lot of data for memory stabilization --> need to drop a lot of early data
 
-Still, an issue occurs. Since fractional differencing uses negative weights for early lags, when we expand the window these negative weights accumulate introducing a downward drift in the series. 
+Still, an issue occurs. Early in the series (small $t$), there are fewer lagged observations, so the negative weights are not fully balanced by future terms. As a result, the cumulative sum of these negative weights can create a systematic downward (or upward) bias in the early portion of $Z_t$.
+
+For example: 
+
+| t | $X_t$ | Weights $ω_0$ … $ω_{t-1}$ | $Z_t$                          |
+| - | ---- | --------------------- | ----------------------------- |
+| 1 | 10   | 1                     | 10                            |
+| 2 | 12   | 1, -0.5               | 12 - 0.5\*10 = 7              |
+| 3 | 13   | 1, -0.5, 0.125        | 13 - 0.5*12 + 0.125*10 ≈ 7.25 |
+
+Note that $Z_2$ and $Z_3$ are much smaller than $X_2$ and $X_3$ and this is the downward shift we talk about.
 
 ### Fixed-Width Window Fractional Differencing
 

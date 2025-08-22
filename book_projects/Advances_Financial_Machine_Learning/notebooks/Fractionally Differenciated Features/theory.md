@@ -70,7 +70,7 @@ Let's explore two alternative implementations of fractional differentiation: the
 In practice we don't have infinite observations, hence...
 
 - The last instance $Z_T$ will have weights $\omega_0, \omega_1, ... \omega_{T-1}$ --> uses all the memory
-- The $T-j$th instance $Z_{T-j}$ will have weights $\omega_0, \omega_1, ... \omega_{T-j-1}$ --> uses some memory
+- The $T_j$th instance $Z_{T-j}$ will have weights $\omega_0, \omega_1, ... \omega_{T-j-1}$ --> uses some memory
 - The first instances will use only a bit of memory...
 
 This creates inconsistency has the beginning of the series will have less memory than the end. We can evalaute a "relative weight-loss" as:

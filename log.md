@@ -43,3 +43,4 @@ Other changes/updates
 - theory of chap. 6 --> ensemble methods
 - theory of chap. 7 --> cross-validation
 - tests of chap. 7 --> cross-validation/tests.ipynb
+- start chap.8 -- feature importance

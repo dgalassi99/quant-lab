@@ -42,3 +42,4 @@ Other changes/updates
 ### 25-08-2025
 - theory of chap. 6 --> ensemble methods
 - theory of chap. 7 --> cross-validation
+- tests of chap. 7 --> cross-validation/tests.ipynb

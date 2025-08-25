@@ -99,7 +99,7 @@ class PurgedKFold(_BaseKFold):
             test_indices = indices[i:j]
 
             # max end of labels in test set
-            maxT1 = self.t1[test_indices].max()
+            maxT1 = self.t1.iloc[test_indices].max()
             maxT1Idx = self.t1.index.searchsorted(maxT1)
 
             # training indices: before test start

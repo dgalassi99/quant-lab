@@ -8,7 +8,7 @@ ML models suffers three type of errors:
 - **Variance:** the algorith has overfit the training set, hence it is very sensible to changes in training data. The model has miskatenly learned noise instead of important patterns.
 - **Noise:** irreducible error why can't be explained by any model.
 
-Given a training set {$x$} and outcome {$y$} suppose there exist a function such that $y = f(x) + \epsilon$. This $\epsilon$ models the noise such that $E(\epsilon_i) = 0$ and $E(\epsilon_i^2) = \sigma_{\epsilon}^2$. The goal is to estimate the function $g(x)$ that best fits $f(x)$ by minimizing the variance of the estimator $E((y_i-g(x_i))^2)$. We can decompose this term as:
+Given a training set $x$ and outcome $y$ suppose there exist a function such that $y = f(x) + \epsilon$. This $\epsilon$ models the noise such that $E(\epsilon_i) = 0$ and $E(\epsilon_i^2) = \sigma_{\epsilon}^2$. The goal is to estimate the function $g(x)$ that best fits $f(x)$ by minimizing the variance of the estimator $E((y_i-g(x_i))^2)$. We can decompose this term as:
 
 $$ E((y_i-g(x_i))^2) = E((g(x_i))-f(x_i)))^2 + V(g(x_i)) + \sigma_{\epsilon}^2 = BIAS^2 + VARIANCE + NOISE $$
 

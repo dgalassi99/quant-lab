@@ -35,6 +35,10 @@ Other changes/updates
 ### 21-08-2025
 - work on the stationarity-memory trade off
 
-# 22-08-2025
+### 22-08-2025
 - create and finish classification_with_fractional_differencing.ipynb
 - finish an important step -- SECTION 1 OF AFML -- DATA ANALYSIS IS NOW DONE -- NEXT TIME WE START WITH MODELLING! Let's goooo
+
+### 25-08-2025
+- theory of chap. 6 --> ensemble methods
+- theory of chap. 7 --> cross-validation

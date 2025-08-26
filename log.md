@@ -44,3 +44,7 @@ Other changes/updates
 - theory of chap. 7 --> cross-validation
 - tests of chap. 7 --> cross-validation/tests.ipynb
 - start chap.8 -- feature importance
+
+### 26-08-2025
+- finish theory cahp. 8 on FI
+- test methods introduced in theory fo chap.8 FI and authors snippets

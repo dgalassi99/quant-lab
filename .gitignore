@@ -40,3 +40,7 @@ Thumbs.db
 # API Keys
 
 docs/api
+
+#ignore hacker rank folder
+
+hacker_rank

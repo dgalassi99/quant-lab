@@ -49,3 +49,7 @@ Other changes/updates
 ### 26-08-2025
 - finish theory cahp. 8 on FI
 - test methods introduced in theory fo chap.8 FI and authors snippets
+
+### 15-05-2025
+- after long pause dedicated to study for interview back on AFML
+- hyperparameters tuning --> theory.md: begins

@@ -29,19 +29,17 @@ A lot of ML algos accept only non-negative params. Take for example C in SVC or 
 
 Why? In SVC an increase of C from 0.01 to 1 or from 1 to 100 can have different responsiveness. If we draw from U[0,100] is quite inefficient. Hence, we prefer drawing from the distribution og the log of those values. That is a "log-uniform distribution".
 
-An rv x follows a log-unif. distrib. between $a>0$ and $b>a$ iff $log[x] ~ U[log(a),log(b)]$. This has a CDF and PDF:
+An rv x follows a log-unif. distrib. between $a>0$ and $b>a$ iff $log[x] ~ U[log(a),log(b)]$. This has a ...
 
-$$ 
-- F[x] = \frac{log[x]-log[a]}{log[b]-log[a]} for a <= x <= b
-- F[x] = 0 for x < a
-- F[x] = 1 for x > b
-$$
+CDF:
+- $F[x] = \frac{log[x]-log[a]}{log[b]-log[a]}$ for $a <= x <= b$
+- $F[x] = 0$ for $x < a$
+- $F[x] = 1$ for $x > b$
 
-
-$$ 
-- f[x] = \frac{1}{xlog[b/a]} for a <= x <= b
-- f[x] = 0 for x < a
-- f[x] = 0 for x > b
+PDF: 
+- $f[x] = \frac{1}{xlog[b/a]}$ for $a <= x <= b$
+- $f[x] = 0$ for $x < a$
+- $f[x] = 0$ for $x > b$
 $$
 
 ## Scoring and HPs Tuning

@@ -6,7 +6,7 @@ CV is the process of splitting the starting data set into a training and testing
 to prevent data leakage. One of the most used CV scheme is the k-fold CV where the train/test split is performed as follows:
 
 - Partition the data into $k$ subsets
-- For $i =1,..., k
+- For $i =1,..., k$
   - Train on all subsets other than $i$
   - Test on subset $i$
  

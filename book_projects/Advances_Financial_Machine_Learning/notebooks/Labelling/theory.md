@@ -5,7 +5,7 @@ In this chapter we learn how to label financial data to retrieve features for su
 
 ## The Fixed-Horizon Method
 
-Consider a feture matrix $X$ with $I$ rows drawn from some bars $t = 1, ..., T$ with $T>I$. An observation $X_i$ is assigned to a label $y_i$:
+Consider a feature matrix $X$ with $I$ rows drawn from some bars $t = 1, ..., T$ with $T>I$. An observation $X_i$ is assigned to a label $y_i$:
 
 - $y_i = -1$ if $r_{t_{i,0},t_{i,0}+h} < - \tau$
 - $y_i = 0$ if $|r_{t_{i,0},t_{i,0}+h}| <= \tau$

@@ -26,7 +26,7 @@ $$ \bar{\sigma}\bar{\rho} + \bar{\sigma}(1-\bar{\rho})/N  $$
 
 Where $\bar{\sigma}$ is average variance of a single estimator, and $\bar{\rho}$ the correlation between estimators. Thus, we should note that.
 
-- The variance of a single estimator (on a subset) is higher than the one of the estimator on the full training (what we get without bagging)  set as the num. of obs. is smaller. The advantage comes from avegaring out on a big number of subestimators.
+- The variance of a single estimator (on a subset) is higher than the one of the estimator on the full training (what we get without bagging)  set as the num. of obs. is smaller. The advantage comes from averaging out on a big number of subestimators.
 - When correlation  $\bar{\rho}$ is close to 1 it is like using only one estimator many times, hence, we lose the bagging advantage. Oppositely, variance reduction is maximimized (linearly decreases with N) when estimators are completely non correlated ($\bar{\rho} = 0$).
 
 This concept of estimators correlation is fundamental in bagging techniques. We saw, for example, how sequantial bootstrapping aims at producing samples as independent as possible --> reducing  $\bar{\rho}$ --> reducing total model variance.

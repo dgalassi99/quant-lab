@@ -15,13 +15,13 @@ where $\tau$ is a constant threshold, $t_{i,0}$ is the index of the bar immediat
 
 $$ r_{t_{i,0},t_{i,0}+h} = P_{t_{i,0}+h}/P_{t_{i,0}} -1 $$
 
-Great... not really! Usually this method is applied on time bars (whihc we saw ahving poor stat. properties). Second, the same threshold $\tau$ is applied regardells the the volatility. 
+Great... not really! Usually this method is applied on time bars (which we saw having poor stat. properties). Second, the same threshold $\tau$ is applied regardless the the volatility. 
 
 Can we solve these problmes? Partially by:
-- Computing a dynamic threshold $\sigma_{t_{i,0}}$ by computing a rolling exponentually weighted std of returns.
+- Computing a dynamic threshold $\sigma_{t_{i,0}}$ by computing a rolling exponentially weighted std of returns.
 - Using volume/dollar bars
  
-Why partially? Because this method does not allow us to intriduce a stop-loss (SL) or take-profit (TP) strategies. Hence, this method will result unrealistic in real operations!
+Why partially? Because this method does not allow us to introduce a stop-loss (SL) or take-profit (TP) strategies. Hence, this method will result unrealistic in real operations!
 
 ## The Triple-Barrier Method 
 

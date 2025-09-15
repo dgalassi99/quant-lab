@@ -36,7 +36,7 @@ This concept of estimators correlation is fundamental in bagging techniques. We 
 Take a classfier that makes prediction on $k$ classes by majority voting among N classfiers where predictions can be labelled as {1,0} if correct or wrong. 
 
 - The accuracy of a single classifier is the probability $p$ ($p>1/k$ which is random guessing) of labelling a prediction as 1. On average we get $Np$ predictions labelled as 1 with varaince $Np(1-p)$
-- By the LLN the amjority voting will reflect the true signal rather than the noise of a single classifier, thus, as N grows, the probability that the majority is correct gets closer to 1 (provided that $p>1/k$) --> bagging improves accuracy as it cancels out the mistake of single classifiers!
+- By the LLN the majority voting will reflect the true signal rather than the noise of a single classifier, thus, as N grows, the probability that the majority is correct gets closer to 1 (provided that $p>1/k$) --> bagging improves accuracy as it cancels out the mistake of single classifiers!
 
 Note: it usually easierto achieve a decrease in $\bar{\rho}$ than getting $p<1/k$ --> bagging is much better at reducing variance than improving accuracy --> start with base classfier with low bias and high varaince and use bagging to reduce the last.
 

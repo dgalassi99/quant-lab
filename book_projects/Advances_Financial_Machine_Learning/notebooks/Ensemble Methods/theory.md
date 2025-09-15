@@ -47,11 +47,11 @@ We saw that financial observations are far from being IID. This have two detrime
 1. Samples drawn with replacement are more likely to be identical (high correlation) --> bagging is not able to reduce the variance even if we increase N
 2. OOB accuracy is inflated because random sampling with replacement places in the training sets observations whihc are very similar to the out-of-bag ones.
 
-In fact a proper k-fold cross validation without shuffling before partitioning will show a test accuracy much lower than th ebagging oob. It is advisable to set StratifiedKFold(n_spiltsk,shuffle=False) when using this class, cross-validate teh bagging classifier and ignore oob accuracy results. A low $k$ is preferred reducing the chance to reduc the likelihood of pracing in the test set observation very similar to the ones in the training set.
+In fact a proper k-fold cross validation without shuffling before partitioning will show a test accuracy much lower than the bagging OOB. It is advisable to set StratifiedKFold(n_spiltsk,shuffle=False) when using this class, cross-validate thh bagging classifier and ignore OOB accuracy results. A low $k$ is preferred reducing the chance to reduce the likelihood of placing in the test set observation very similar to the ones in the training set.
 
 ## Random Forest
 
-RF follows baggin structure but introduces another layer of randomness by reducing the number of available features at the moment of node splits. This further decorrelates the estimators as it will be less likey to have similar splits in all subtrees. Another important traits of RF is its ability to output feature importance and oob accuracy estimates. In practice with non-IID obesrvations we can implement some of th efollowing tricks:
+RF follows bagging structure but introduces another layer of randomness by reducing the number of available features at the moment of node splits. This further decorrelates the estimators as it will be less likey to have similar splits in all subtrees. Another important traits of RF is its ability to output feature importance and oob accuracy estimates. In practice with non-IID obesrvations we can implement some of the following tricks:
 
 - Set max_features to a low value by forcing the trees to be as different as possible
 - Set the regularization parameter min_weight_fraction_leaf to a large value (5%) such that oob accuracy converges to out-of-sample (k-fold) accuracy
@@ -65,7 +65,7 @@ Use BaggingClassifier on RandomForestClassifier where max_samples is set tot the
 
 ## Boosting
 
-Boosting aims at reducing the bias of low-variance models. It generates one ranodm subsample and fits one estimator. If this estimator perform better thana threshold (50% in a binary classfier - better than random) the estimator is kept, otherwise discarded. Give more weight to the misclassified observations and repeat the pevious step until N estimators are produced. The ensemble forecats is the weighted average forecats over the N individial forecats, where weights are functions of indicial estimators accuracies. 
+Boosting aims at reducing the bias of low-variance models. It generates one ranodm subsample and fits one estimator. If this estimator perform better than a threshold (50% in a binary classfier - better than random) the estimator is kept, otherwise discarded. Give more weight to the misclassified observations and repeat the previous step until N estimators are produced. The ensemble forecats is the weighted average forecats over the N individial forecats, where weights are functions of indicial estimators accuracies. 
 
 ## Bagging vs Boosting in Finance
 

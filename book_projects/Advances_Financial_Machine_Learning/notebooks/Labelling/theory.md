@@ -30,18 +30,18 @@ Label an obs. according to the first barrier it touches. We have:
 - Two horizontal barriers representing the touch of TP/SL which label the obs. as +-1
 - One vertical barrier touched after a given amount of elapsed bars ($h$) which labels the obs. as 0
 
-We have to note that: (1) to label an obs. we neet to take into account the the entire path spanning $[t_{i,0},t_{i,0}+h]$; (2) we denote by $t_{i,1}$ the time of the first touch; (3) the horizontal barriers are not necessarily symmetric.
+We have to note that: (1) to label an obs. we need to take into account the the entire path spanning $[t_{i,0},t_{i,0}+h]$; (2) we denote by $t_{i,1}$ the time of the first touch; (3) the horizontal barriers are not necessarily symmetric.
 
 ## Size and Side
 
-Now we want to understand how an ML algo. can learn both side and size of a trade. Ne need to elarn teh side when we do not have a model to set the sign (long/short) of our position. How do we recognize TP or SL in this situation?
+Now we want to understand how an ML algo. can learn both side and size of a trade. Ne need to learn the side when we do not have a model to set the sign (long/short) of our position. How do we recognize TP or SL in this situation?
 
 We can apply the TBM direcly on all events with a fixed target...but a full pipeline consists in:
 
 1. Apply a filter to only get some events, for example CUSUM filter
 2. Calculate a dynamic target, for example as a the exponential moving volatility (getDailyVol)
 3. Define a minimum return to consider an event and use a function to filter out events that do not touch this (getEvents)
-4. Now you have a df with t1 indicating the timestamp of what occurs first on thpose event (tp, sl or vertical barrier hit) and teh target
+4. Now you have a df with t1 indicating the timestamp of what occurs first on those eventd (tp, sl or vertical barrier hit) and the target
 5. Apply TBM to get the final labels
 
 ## Meta-Labelling
@@ -100,7 +100,7 @@ Definitions:
 - F1 Score = $2/(1/Precision+1/Recall)$
 The trade off between TPR and FPR is the key problem of binary classification (usually represented on the ROC curve).
 
-This if we aim at improving the precision by lowering FP, this results in an increase of FN (decrease of Recall/TPR) and viceversa. So the usual metric we want to maximie is their harmonic average: F1 Score. Meta-labelling helps us in achieving this result... *how?*
+This if we aim at improving the precision by lowering FP, this results in an increase of FN (decrease of Recall/TPR) and viceversa. So the usual metric we want to maximize is their harmonic average: F1 Score. Meta-labelling helps us in achieving this result... *how?*
 
 1. Build a model with high recall and low precision (low FN) --> "do not lose opportunities logic"
 2. Apply meta-labelling to the positive predicted by the primary model --> "filter out to keep only good opportunities"

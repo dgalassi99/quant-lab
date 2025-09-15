@@ -40,7 +40,6 @@ PDF:
 - $f[x] = \frac{1}{xlog[b/a]}$ for $a <= x <= b$
 - $f[x] = 0$ for $x < a$
 - $f[x] = 0$ for $x > b$
-$$
 
 ## Scoring and HPs Tuning
 
@@ -56,4 +55,4 @@ Investment strategies profit from positioning in high confidence cases. Gains in
 
 Differently, log-loss (entropy-loss) computes the log-likelihood of the classifier given the true label which takes prediction probs. into account.
 
-$$ L[Y,P] = - log(Prob[Y|P]) = -N^-1 
+$$ L[Y,P] = - log(Prob[Y|P]) = -N^-1  finsh formula $$
